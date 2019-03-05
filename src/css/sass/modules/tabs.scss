@@ -1,0 +1,154 @@
+$max-tab-count: 5;
+.tab-wrap {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  background-color: #fff;
+  margin: 40px 0;
+}
+
+.tab {
+  display: none;
+  @for $i from 1 through $max-tab-count {
+    &:checked:nth-of-type(#{$i}) ~ .tab__content:nth-of-type(#{$i}) {
+      opacity: 1;
+      transition: 0.5s opacity ease-in, 0.8s transform ease;
+      position: relative;
+      top: 0;
+      z-index: 100;
+      transform: translateY(0px);
+      text-shadow: 0 0 0;
+    }
+  }
+  &:first-of-type:not(:last-of-type) + label {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &:not(:first-of-type):not(:last-of-type) + label {
+    border-radius: 0;
+  }
+  &:last-of-type:not(:first-of-type) + label {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &:checked + label {
+    background-color: $black;
+    color: #fff;
+    box-shadow: 0 -1px 0 #052238 inset;
+    &:hover {
+      background: transparent;
+      border: none;
+      color: $grey;
+      box-shadow: 0 -1px 0 #052238 inset;
+    }
+  }
+  + label {
+    cursor: pointer;
+    font-family: "Proxima Nova", serif;
+    display: block;
+    text-decoration: none;
+    flex-grow: 3;
+    text-align: center;
+    background-color: #f2f2f2;
+    user-select: none;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: $grey;
+    box-shadow: 0 -1px 0 #fff inset;
+    // padding: 11px;
+    padding: 5px 14px;
+    font-weight: 300;
+    font-size: 12px;
+    @include transition();
+
+    // @include divi {
+    //   min-width: 216px;
+    // }
+
+    @include big-phone {
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: #f9f9f9;
+      box-shadow: 0 1px 0 #f4f4f4 inset;
+    }
+  }
+  &__content {
+    // padding: 10px 25px;
+    background-color: transparent;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    opacity: 0;
+    left: 0;
+    transform: translateY(-3px);
+    // border-radius: $tab-wrap-border-radius;
+  }
+}
+
+.tab__content {
+  height: 100%;
+  .wrapper {
+    padding-top: 108px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    @include ipad {
+      flex-direction: column;
+      // padding-top: 27px;
+      padding-top: 54px;
+    }
+
+    .left,
+    .right {
+      flex: 50% 1 1;
+      //   padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .left {
+      @include min-ipad {
+        margin-right: 20px;
+      }
+
+      @include ipad {
+        margin-bottom: 20px;
+      }
+      p {
+        line-height: 1.78;
+        @include divi {
+          text-align: left;
+        }
+        @include ipad {
+          text-align: center;
+        }
+        &:first-child {
+          font-size: 18px;
+          color: $grey;
+          margin-bottom: 27px;
+        }
+      }
+      .button {
+        margin-top: 17px;
+        align-self: flex-end;
+        @include ipad {
+          align-self: center;
+        }
+      }
+    }
+    .right {
+      @include min-ipad {
+        margin-left: 20px;
+      }
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

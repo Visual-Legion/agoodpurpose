@@ -1,0 +1,223 @@
+body {
+  a,
+  button,
+  input[type="button"],
+  [type="submit"] {
+    position: relative;
+    cursor: pointer;
+    @include transition();
+    font-family: $heading_font;
+    font-size: 12px;
+    &.button,
+    &.tribe-events-read-more {
+      padding: 10px 10px;
+      min-width: 145px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    &.button-black {
+      font-weight: 300;
+      background: $black;
+      border: 1px solid $black;
+      color: #fff;
+      &:hover {
+        background: transparent;
+        color: $black;
+      }
+    }
+
+    &.button-black-alt,
+    &.tribe-events-read-more {
+      background: transparent;
+      border: 1px solid $black;
+      color: $black;
+      &:hover {
+        background: $black;
+        color: #fff;
+      }
+    }
+
+    &.button-accent_color {
+      background: $accent_color;
+      border: 1px solid $accent_color;
+      color: #fff;
+      &:hover {
+        background: transparent;
+        color: $accent_color;
+      }
+    }
+
+    &.button-accent_color-alt {
+      background: transparent;
+      border: 1px solid $accent_color;
+      color: $accent_color;
+      &:hover {
+        background: $accent_color;
+        color: #fff;
+      }
+    }
+
+    &.cta-booking {
+      box-shadow: 0 15px 15px 0 rgba(125, 125, 125, 0.52);
+      background-color: $accent_color;
+      padding: 18px 36px;
+      font-weight: bold;
+      &:hover {
+        background-color: #e17f3f;
+      }
+    }
+
+    &.cta-pale {
+      background: $pale;
+      border: 2px solid $pale;
+      color: #fff;
+      // padding: 29px 65px;
+      // padding: 20px 40px;
+
+      // padding: 20px 0;
+      // width: 208px;
+      padding: 16px 0;
+      width: 144px;
+      text-align: center;
+      &:hover {
+        background: $accent_color;
+        color: #fff;
+        border-color: $accent_color;
+      }
+    }
+
+    &.cta-black-alt {
+      background: transparent;
+      border: 2px solid $black;
+      color: $black;
+      font-weight: bold;
+      // padding: 29px 65px;
+      // padding: 20px 40px;
+
+      // padding: 20px 0;
+      // width: 208px;
+      padding: 16px 0;
+      width: 144px;
+      text-align: center;
+      &:hover {
+        background: $black;
+
+        color: #fff;
+      }
+    }
+
+    &.banner-black-alt {
+      background: transparent;
+      border: 2px solid $black;
+      color: $black;
+      font-weight: bold;
+      padding: 15px 0;
+      width: 207px;
+      text-align: center;
+      &:hover {
+        background: $black;
+
+        color: #fff;
+      }
+    }
+  }
+
+  .tribe-events-nav-pagination {
+    a {
+      color: $black;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .tribe-events-nav-previous,
+    .tribe-events-nav-left,
+    .tribe-events-nav-next,
+    .tribe-events-nav-right {
+      span {
+        display: none;
+      }
+      a {
+        background: transparent;
+        color: $black;
+      }
+    }
+
+    a.tribe-events-nav-previous:before,
+    a.tribe-events-nav-left:before,
+    a.tribe-events-nav-next:after,
+    a.tribe-events-nav-right:after,
+    .tribe-events-nav-previous a:before,
+    .tribe-events-nav-left a:before,
+    .tribe-events-nav-next a:after,
+    .tribe-events-nav-right a:after {
+      content: "";
+      width: 33px;
+      height: 21px;
+      vertical-align: sub;
+
+      display: inline-block;
+      background-image: url(./img/icons/arrow-left.svg);
+      @include phone {
+        display: none;
+      }
+    }
+    a.tribe-events-nav-previous:before,
+    a.tribe-events-nav-left:before,
+    .tribe-events-nav-previous a:before,
+    .tribe-events-nav-left a:before {
+      margin-right: 15px;
+    }
+    a.tribe-events-nav-next,
+    a.tribe-events-nav-right,
+    .tribe-events-nav-next a,
+    .tribe-events-nav-right a {
+      &:after {
+        transform: rotate(180deg);
+        margin-left: 15px;
+      }
+    }
+  }
+
+  #tribe-events-footer:after,
+  #tribe-events-footer:before,
+  #tribe-events-header:after,
+  #tribe-events-header:before {
+    background-color: $black;
+  }
+
+  #tribe-events .tribe-events-button,
+  .tribe-events-button {
+    background-color: $accent_color;
+    border-radius: 0;
+    padding: 18px 0;
+    width: 200px;
+    &:hover {
+      background-color: #ce7a43;
+    }
+  }
+
+  //see later how to refactor
+  // .tab-wrap {
+  //   .tab + label {
+  //     background: transparent;
+  //     border: none;
+  //     color: $grey;
+  //     box-shadow: 0 -1px 0 #fff inset;
+  //     // height: 60px;
+  //     padding: 12px;
+  //     font-weight: 300;
+  //   }
+  //   .tab:checked + label {
+  //     background-color: $black;
+  //     color: #fff;
+  //     box-shadow: 0 -1px 0 #052238 inset;
+  //     &:hover {
+  //       background: transparent;
+  //       border: none;
+  //       color: $grey;
+  //       box-shadow: 0 -1px 0 #052238 inset;
+  //     }
+  //   }
+  // }
+}

@@ -1,0 +1,31 @@
+.testimonials {
+  //   padding: 108px 0;
+  padding: 70px 0;
+  .testimonial__slider {
+    .testimonial {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        // font-size: 32px;
+        font-size: 22px;
+        text-align: center;
+        width: 80%;
+      }
+      .author {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 44px;
+        span {
+          font-size: 26px;
+          color: $dark-grey;
+          font-style: italic;
+          padding-left: 35px;
+        }
+      }
+    }
+  }
+}

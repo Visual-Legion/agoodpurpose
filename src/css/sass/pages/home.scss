@@ -1,0 +1,211 @@
+.home {
+  .banner {
+    background: url("http://betalisboa2.local/wp-content/uploads/2019/02/Image-6@2x.jpg");
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end; // hard if not begining, center or end because dependant on screen
+    @include ipad {
+      align-items: center;
+    }
+    .button {
+      @include ipad {
+        align-self: center;
+      }
+    }
+    .wrapper {
+      // transform: translateY(-20%);
+      @include ipad {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+      }
+
+      .multi-line-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        @include ipad {
+          // flex-direction: column;
+          // flex-wrap: wrap;
+          // justify-content: center;
+          align-items: center;
+        }
+      }
+
+      h1 {
+        // width: 50%;
+        color: #fff;
+        &:last-of-type {
+          margin-bottom: 54px;
+        }
+        // @include ipad {
+        //   width: 100%;
+        // }
+      }
+    }
+  }
+  .meet-the-teacher {
+    background-color: $accent_color;
+
+    .wrapper {
+      background-color: #fff;
+      box-shadow: 10px 40px 80px 30px rgba(0, 0, 0, 0.1);
+
+      margin-top: 54px;
+      margin-bottom: 54px;
+      padding: 54px;
+      @include divi {
+        margin-top: 27px;
+        margin-bottom: 27px;
+        padding: 27px;
+      }
+
+      h2.first-title {
+        color: $dark-grey;
+        margin-bottom: 54px;
+      }
+      .middle {
+        display: flex;
+        position: relative;
+
+        @include divi {
+          flex-direction: column;
+        }
+
+        .left {
+          width: 40%;
+          margin-right: 27px;
+          @include divi {
+            width: 100%;
+            text-align: center;
+          }
+          p {
+            margin: 20px 0;
+          }
+        }
+        // something wrong here....
+        .right {
+          position: relative;
+          width: 60%;
+          @include divi {
+            width: 100%;
+          }
+          img {
+            position: absolute;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+      .bottom {
+        display: flex;
+        // margin: 54px 0;
+        margin-bottom: 54px;
+        @include divi {
+          flex-wrap: wrap;
+        }
+        .count-up {
+          flex: 25% 1 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-top: 54px;
+          @include divi {
+            flex: 50% 1 1;
+          }
+          @include big-phone {
+            flex: 100% 1 1;
+          }
+          .count-up__number {
+            font-weight: bold;
+            font-size: 22px;
+          }
+        }
+      }
+    }
+  }
+  .upcoming-events {
+    background-color: $pale;
+
+    // .wrapper {
+    //   display: flex;
+    //   flex-direction: column;
+    // }
+
+    #tribe-events-header {
+      display: none;
+    }
+
+    h1 {
+      margin-bottom: 54px;
+    }
+
+    .tribe-events-nav-pagination {
+      text-align: right;
+    }
+
+    #tribe-events {
+      #tribe-events-content.tribe-events-list {
+        margin-bottom: 0;
+      }
+      .tribe-events-ical {
+        display: none;
+      }
+    }
+    #tribe-events-footer {
+      display: none;
+    }
+    .tribe-events-page-title {
+      text-align: left;
+      font-weight: normal;
+    }
+    .tribe-events-loop
+      .type-tribe_events:not(:first-of-type):not(:nth-of-type(2)) {
+      display: none;
+    }
+  }
+  .let-me-help {
+    background: url("http://betalisboa2.local/wp-content/uploads/2019/02/Group-99@2x.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    .wrapper {
+      @include min-ipad {
+        width: 50%;
+      }
+      h2 {
+        color: #fff;
+        // width: 50%;
+        margin-bottom: 108px;
+      }
+      .bottom {
+        @include divi {
+          text-align: center;
+        }
+        @include big-phone {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .button {
+          &:first-child {
+            margin-right: 110px;
+            @include divi {
+              margin-right: 20px;
+            }
+            @include big-phone {
+              margin: 0;
+              margin-bottom: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

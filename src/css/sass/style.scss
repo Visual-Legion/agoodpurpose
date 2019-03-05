@@ -1,0 +1,43 @@
+/**
+ * styles.scss
+ * ---
+ * Main `sass` file. Import here `sass` files
+ */
+
+// User Interface
+@import "ui/variables";
+@import "ui/mixins";
+@import "ui/fonts";
+@import "ui/breakpoints";
+@import "ui/general";
+@import "ui/ui";
+@import "ui/reset";
+@import "ui/wordpress";
+@import "ui/utils";
+@import "ui/wrapper";
+@import "ui/print";
+@import "ui/woo";
+@import "ui/slick";
+
+// Layout
+
+@import "layout/header";
+@import "layout/nav";
+@import "layout/sidebar";
+@import "layout/footer";
+
+// Modules
+
+@import "modules/photo_gallery";
+@import "modules/form";
+@import "modules/button";
+@import "modules/tabs";
+@import "modules/testimonial-slider";
+// @import "modules/events/index";  // from betalisboa-2
+
+// Pages
+
+@import "pages/home";
+@import "pages/contact";
+@import "pages/cookie";
+@import "pages/activity";
