@@ -8,9 +8,6 @@
 //Use tablet breakpoint for small menus, divi big menus
 
 .header {
-  // only hamburger menu in this website
-  pointer-events: none;
-
   padding: 0 35px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0);
@@ -53,9 +50,10 @@
   .navs_wrapper {
     // @include inline-middle();
     // center?
-    // @media screen and (min-width: 1281px) {
-    padding: 20px 0;
-    // }
+    @media screen and (min-width: 1281px) {
+      // padding: 20px 0;
+      padding-top: 20px;
+    }
   }
 
   .logo {
@@ -64,6 +62,10 @@
     position: absolute;
     @media screen and (max-width: 1279px) {
       position: relative;
+    }
+    @include ipad {
+      position: absolute;
+      top: 5px;
     }
     img {
       width: 128px;
@@ -93,6 +95,7 @@
         transition: left 0.4s ease-in-out;
         &.tablet_menu_active {
           left: 0;
+          background: $brown;
           // pointer-events: all;
         }
       }
@@ -137,7 +140,7 @@ $translateX: 0;
   width: $width-line;
   height: $height-icon;
   z-index: 101;
-  //display: none;
+  display: none;
   @media screen and (max-width: 1279px) {
     display: inline-block;
     position: absolute;
@@ -150,7 +153,7 @@ $translateX: 0;
 
   .line {
     display: block;
-    background: #fff;
+    background: #000;
     width: $width-line;
     height: $height-line;
     position: absolute;

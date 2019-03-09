@@ -13,51 +13,89 @@
 		console.log("JS/JQ Ready v.1 ");
 
 		/* Loader */
-		$(window).on("load", function() {
+		$(window).on("load", function(e) {
+			scrollDis(e);
 			setTimeout(function() {
 				$(".loader").fadeOut("slow");
-			}, 500);
+			}, 5000);
 		});
 
-		$(".testimonial__slider").slick({
-			autoplay: true,
-			autoplaySpeed: 5000,
-			arrows: true,
-			dots: true
-		});
+		let segments = document.querySelectorAll(".segment");
+		// let elementHeight = segments.clientHeight;
+		let segmentHeight = 15;
 
-		$("#buy-tickets input[type='number']").after(
-			'<div class="inc button">+</div>'
-		);
-		$("#buy-tickets input[type='number']").before(
-			'<div class="dec button">-</div>'
-		);
+		let inView = element => {
+			// get window height
+			let windowHeight = window.innerHeight;
+			// get number of pixels that the document is scrolled
+			let scrollY = window.scrollY || window.pageYOffset;
 
-		$("#buy-tickets div.button").on("click", function(e, el) {
-			var $button = $(this);
-			var oldValue = $button
-				.parent()
-				.find("input")
-				.val();
+			// get current scroll position (distance from the top of the page to the bottom of the current viewport)
+			let scrollPosition = scrollY + windowHeight;
+			// get element position (distance from the top of the page to the bottom of the element)
+			let elementPosition =
+				element.getBoundingClientRect().top + scrollY + segmentHeight;
 
-			if ($button.text() == "+") {
-				var newVal = parseFloat(oldValue) + 1;
-			} else {
-				// Don't allow decrementing below zero
-				if (oldValue > 0) {
-					var newVal = parseFloat(oldValue) - 1;
-				} else {
-					newVal = 0;
-				}
+			// is scroll position greater than element position? (is element in view?)
+			if (scrollPosition > elementPosition) {
+				return true;
 			}
 
-			$button
-				.parent()
-				.find("input")
-				.val(newVal);
+			return false;
+		};
 
-			// wooTicketsValidation(e, el);
+		let animateLines = () => {
+			// is element in view?
+			segments.forEach(element => {
+				if (inView(element)) {
+					// element is in view, add class to element
+					element.classList.add("animate");
+				}
+			});
+		};
+
+		let scrollDis = e => {
+			const targets = document.querySelectorAll(".scroll");
+			var scrolled = window.pageYOffset;
+
+			targets.forEach(target => {
+				let pos = window.pageYOffset * target.dataset.rate;
+				// console.log("target", target);
+				// console.log("target.dataset.rate", target.dataset.rate);
+				target.style.transform = "translate3d(0px," + pos + "px,0px)";
+			});
+		};
+
+		window.addEventListener("scroll", e => {
+			scrollDis(e);
+			animateLines();
 		});
+
+		// $("#buy-tickets div.button").on("click", function(e, el) {
+		// 	var $button = $(this);
+		// 	var oldValue = $button
+		// 		.parent()
+		// 		.find("input")
+		// 		.val();
+
+		// 	if ($button.text() == "+") {
+		// 		var newVal = parseFloat(oldValue) + 1;
+		// 	} else {
+		// 		// Don't allow decrementing below zero
+		// 		if (oldValue > 0) {
+		// 			var newVal = parseFloat(oldValue) - 1;
+		// 		} else {
+		// 			newVal = 0;
+		// 		}
+		// 	}
+
+		// 	$button
+		// 		.parent()
+		// 		.find("input")
+		// 		.val(newVal);
+
+		// 	// wooTicketsValidation(e, el);
+		// });
 
 		// TODO
 		// if (jQuery('button[type="submit"][name="wootickets_process"]')) {

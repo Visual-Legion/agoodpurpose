@@ -15,10 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="description" content="<?php //bloginfo('description'); ?>"> -->
 
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link rel="preload" href="https://use.typekit.net/ecq5blu.css" as="style" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/ecq5blu.css">
+
+    <link rel="preload" href="https://use.typekit.net/aqo8mdw.css" as="style" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/aqo8mdw.css">
 
 
     <?php wp_head(); ?>
@@ -36,14 +35,20 @@
 <body <?php body_class(); ?>>
 
 
-    <?php $header = get_field('header','options'); ?>
+    <?php //$header = get_field('header','options'); ?>
     <!-- header -->
     <header class="header clear" role="banner">
         <div class="header_wrapper">
             <!-- logo -->
             <div class="logo link">
                 <a href="<?php echo home_url(); ?>"></a>
-                <img src="<?php echo $header['image'] ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="296" height="147" viewBox="0 0 296 147">
+                    <text id="agoodpurpose_Logo" data-name="agoodpurpose Logo" transform="translate(3 99)"
+                        font-size="83" font-family="MissLeGateesPro, MissLeGatees Pro">
+                        <tspan x="0" y="0">agoodpurpose</tspan>
+                    </text>
+                </svg>
+
             </div>
             <!-- /logo -->
 

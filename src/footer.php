@@ -5,7 +5,7 @@
 			?>
 
 			<footer class="footer" role="contentinfo">
-			    <div class="footer__wrapper wrapper">
+			    <!-- <div class="footer__wrapper wrapper">
 			        <div class="column column-1">
 			            <p class="footer__title">Betalisboa</p>
 			            <p>FOLLOW US</p>
@@ -45,12 +45,11 @@
 			                <input type="submit" value="Sign up" />
 			            </form>
 			        </div>
-			    </div>
+			    </div> -->
 			    <!-- copyright -->
-			    <div class="copyright">
-			        <!-- <div class="line"></div> -->
+			    <!-- <div class="copyright">
 			        <p> We create for <a href="https://agoodpurpose.com">@agoodpurpose</a> </p>
-			    </div>
+			    </div> -->
 			    <!-- /copyright -->
 			</footer>
 			<!-- /footer -->

@@ -28,41 +28,54 @@
 				console.log("JS/JQ Ready v.1 ");
 
 				/* Loader */
-				$(window).on("load", function () {
-					setTimeout(function () {
-						$(".loader").fadeOut("slow");
-					}, 500);
+				$(window).on("load", function (e) {
+					scrollDis(e);
+					// setTimeout(function() {
+					// 	$(".loader").fadeOut("slow");
+					// }, 500);
 				});
 
-				$(".testimonial__slider").slick({
-					autoplay: true,
-					autoplaySpeed: 5000,
-					arrows: true,
-					dots: true
+				var scrollDis = function scrollDis(e) {
+					var targets = document.querySelectorAll(".scroll");
+					var scrolled = window.pageYOffset;
+
+					targets.forEach(function (target) {
+						var pos = window.pageYOffset * target.dataset.rate;
+						console.log("target", target);
+						console.log("target.dataset.rate", target.dataset.rate);
+						target.style.transform = "translate3d(0px," + pos + "px,0px)";
+					});
+				};
+
+				window.addEventListener("scroll", function (e) {
+					scrollDis(e);
 				});
 
-				$("#buy-tickets input[type='number']").after('<div class="inc button">+</div>');
-				$("#buy-tickets input[type='number']").before('<div class="dec button">-</div>');
+				// $("#buy-tickets div.button").on("click", function(e, el) {
+				// 	var $button = $(this);
+				// 	var oldValue = $button
+				// 		.parent()
+				// 		.find("input")
+				// 		.val();
 
-				$("#buy-tickets div.button").on("click", function (e, el) {
-					var $button = $(this);
-					var oldValue = $button.parent().find("input").val();
+				// 	if ($button.text() == "+") {
+				// 		var newVal = parseFloat(oldValue) + 1;
+				// 	} else {
+				// 		// Don't allow decrementing below zero
+				// 		if (oldValue > 0) {
+				// 			var newVal = parseFloat(oldValue) - 1;
+				// 		} else {
+				// 			newVal = 0;
+				// 		}
+				// 	}
 
-					if ($button.text() == "+") {
-						var newVal = parseFloat(oldValue) + 1;
-					} else {
-						// Don't allow decrementing below zero
-						if (oldValue > 0) {
-							var newVal = parseFloat(oldValue) - 1;
-						} else {
-							newVal = 0;
-						}
-					}
+				// 	$button
+				// 		.parent()
+				// 		.find("input")
+				// 		.val(newVal);
 
-					$button.parent().find("input").val(newVal);
-
-					// wooTicketsValidation(e, el);
-				});
+				// 	// wooTicketsValidation(e, el);
+				// });
 
 				// TODO
 				// if (jQuery('button[type="submit"][name="wootickets_process"]')) {

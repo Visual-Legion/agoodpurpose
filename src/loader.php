@@ -1,9 +1,11 @@
 <div class="loader parent">
-	<!-- <div class="content_wrapper child"> -->
-		<!-- <img src="<?php //echo get_template_directory_uri(), '/img/logo.svg'; ?>"> -->
-		<!-- <div class="loader-05"></div> -->
-	<!-- </div> -->
-	<div class="utopia_wrapper">
-		<div class="glitch" data-text="Visual Legion">Visual Legion</div> 
-	</div>
+    <div class="child">
+        <div class="animated-text-wrapper">
+            <span class="loader-we">we</span> <span class="loader-make">make</span> <span
+                class="loader-websites">websites</span> <span class="loader-for">for</span> <span
+                class="loader-yoga">yoga</span> <span class="loader-teachers">teachers</span> <span
+                class="loader-and">and</span> <span class="loader-wellness">wellness</span> <span
+                class="loader-instructors">instructors</span>
+        </div>
+    </div>
 </div>

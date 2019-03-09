@@ -1,7 +1,4 @@
 //F(x) = ( $wrapper-width - (n-1)$gutter-width ) / n
-.archive {
-  background-color: $pale;
-}
 
 .details {
   font-size: 16px;
@@ -154,9 +151,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
 
-    @include divi {
-      text-align: center;
-    }
+    // @include divi {
+    //   text-align: center;
+    // }
   }
   h1,
   h2,
@@ -175,7 +172,9 @@ body {
     line-height: $line-height-base-headings;
   }
   h1,
-  h1 span {
+  h1 span,
+  h2,
+  h2 span {
     font-size: $h1;
     font-weight: 300;
     line-height: 1.23;
@@ -183,14 +182,14 @@ body {
       font-size: $h2;
     }
   }
-  h2,
-  h2 span {
-    font-size: $h2;
-    line-height: 1.32;
-    @include big-phone {
-      font-size: $h3;
-    }
-  }
+  // h2,
+  // h2 span {
+  //   font-size: $h2;
+  //   line-height: 1.32;
+  //   @include big-phone {
+  //     font-size: $h3;
+  //   }
+  // }
   h3,
   h3 span {
     font-size: $h3;
@@ -215,7 +214,8 @@ body {
   a {
     font-weight: $body_weight;
     font-family: $body_font;
-    line-height: 1.78;
+    // line-height: 1.78;
+    line-height: 1.5;
   }
 
   // a,
@@ -553,5 +553,57 @@ skew to change the 'thickness' of the glitch.*/
     //  transform:translate(0);
     //  opacity:1;
     // }
+  }
+}
+
+.loader {
+  .animated-text-wrapper {
+    span {
+      display: inline-block;
+      opacity: 0;
+      will-change: auto;
+      transform: translate3d(0, 100vh, 0);
+      margin: 0 5px;
+      font-size: 21px;
+
+      // animation-duration: 4s;
+      animation-duration: 5s;
+      animation-fill-mode: forwards;
+
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal;
+      animation-name: text-animate-up;
+
+      @for $i from 1 through 100 {
+        // for each $col_#{i}
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.1s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes text-animate-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100vh, 0);
+  }
+  20% {
+    transform: translate3d(0, 0, 0);
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -100vh, 0);
   }
 }

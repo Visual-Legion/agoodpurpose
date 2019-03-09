@@ -1,211 +1,686 @@
 .home {
-  .banner {
-    background: url("http://betalisboa2.local/wp-content/uploads/2019/02/Image-6@2x.jpg");
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    align-items: flex-end; // hard if not begining, center or end because dependant on screen
+  overflow-x: hidden;
+  h1,
+  h2 {
     @include ipad {
-      align-items: center;
+      margin-bottom: 20px;
     }
-    .button {
-      @include ipad {
-        align-self: center;
-      }
+  }
+  h3 {
+    color: $grey;
+  }
+  img {
+    will-change: auto;
+  }
+  .left {
+    @include min-ipad {
+      width: 25%;
     }
-    .wrapper {
-      // transform: translateY(-20%);
-      @include ipad {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-      }
-
-      .multi-line-title {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        @include ipad {
-          // flex-direction: column;
-          // flex-wrap: wrap;
-          // justify-content: center;
-          align-items: center;
-        }
-      }
-
-      h1 {
-        // width: 50%;
-        color: #fff;
-        &:last-of-type {
-          margin-bottom: 54px;
-        }
-        // @include ipad {
-        //   width: 100%;
-        // }
+  }
+  .right {
+    @include min-ipad {
+      width: 75%;
+      padding-left: 80px;
+    }
+    position: relative;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
       }
     }
   }
-  .meet-the-teacher {
-    background-color: $accent_color;
-
+  .left,
+  .right {
+    @include ipad {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  .website-features,
+  .what-will-you-get {
     .wrapper {
-      background-color: #fff;
-      box-shadow: 10px 40px 80px 30px rgba(0, 0, 0, 0.1);
-
-      margin-top: 54px;
-      margin-bottom: 54px;
-      padding: 54px;
-      @include divi {
-        margin-top: 27px;
-        margin-bottom: 27px;
-        padding: 27px;
+      // margin-left: 30%;
+      h1,
+      h2 {
+        @include min-ipad {
+          margin-bottom: 40px;
+          margin-left: 25%;
+        }
       }
-
-      h2.first-title {
-        color: $dark-grey;
-        margin-bottom: 54px;
-      }
-      .middle {
-        display: flex;
+      // img {
+      //   @include ipad {
+      //     display: none;
+      //   }
+      // }
+      .features {
         position: relative;
 
-        @include divi {
-          flex-direction: column;
+        z-index: 3;
+        @include min-ipad {
+          margin-left: 25%;
         }
 
-        .left {
-          width: 40%;
-          margin-right: 27px;
-          @include divi {
-            width: 100%;
-            text-align: center;
-          }
-          p {
-            margin: 20px 0;
-          }
-        }
-        // something wrong here....
-        .right {
+        .feature {
           position: relative;
-          width: 60%;
-          @include divi {
-            width: 100%;
-          }
-          img {
-            position: absolute;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-      .bottom {
-        display: flex;
-        // margin: 54px 0;
-        margin-bottom: 54px;
-        @include divi {
-          flex-wrap: wrap;
-        }
-        .count-up {
-          flex: 25% 1 1;
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          margin-top: 54px;
-          @include divi {
-            flex: 50% 1 1;
+
+          z-index: 4;
+          @include min-ipad {
+            padding: 50px 0 50px 50px;
+            margin-left: -50px;
           }
-          @include big-phone {
-            flex: 100% 1 1;
+          @include ipad {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
           }
-          .count-up__number {
-            font-weight: bold;
-            font-size: 22px;
+          // .text-group {
+          //   @include ipad {
+          //     background: $white;
+          //     z-index: 5;
+          //   }
+          // }
+        }
+        .over-eye {
+          // margin-left: -80px;
+          // padding: 40px 0 40px 80px;
+          background-color: $white;
+          @include ipad {
+            background-color: transparent;
           }
         }
       }
     }
   }
-  .upcoming-events {
-    background-color: $pale;
-
-    // .wrapper {
-    //   display: flex;
-    //   flex-direction: column;
-    // }
-
-    #tribe-events-header {
-      display: none;
+  .website-features {
+    img,
+    .feature-rect {
+      // width: 400px;
+      // height: 533px;
+      width: 350px;
+      height: 467px;
+      position: absolute;
     }
-
-    h1 {
-      margin-bottom: 54px;
-    }
-
-    .tribe-events-nav-pagination {
-      text-align: right;
-    }
-
-    #tribe-events {
-      #tribe-events-content.tribe-events-list {
-        margin-bottom: 0;
+    img {
+      z-index: 2;
+      left: 0;
+      top: 330px;
+      @include ipad {
+        left: initial;
+        right: -40px;
       }
-      .tribe-events-ical {
+      @include big-phone {
         display: none;
       }
     }
-    #tribe-events-footer {
-      display: none;
-    }
-    .tribe-events-page-title {
-      text-align: left;
-      font-weight: normal;
-    }
-    .tribe-events-loop
-      .type-tribe_events:not(:first-of-type):not(:nth-of-type(2)) {
-      display: none;
+    .feature-rect {
+      background-color: #dde8e2;
+      z-index: 1;
+      left: 20px;
+      top: 380px;
+      @include ipad {
+        left: initial;
+        right: -80px;
+      }
+      @include big-phone {
+        right: 80px;
+      }
     }
   }
-  .let-me-help {
-    background: url("http://betalisboa2.local/wp-content/uploads/2019/02/Group-99@2x.jpg");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  .what-will-you-get {
     .wrapper {
-      @include min-ipad {
-        width: 50%;
+      .dodge {
+        img {
+          @include ipad {
+            display: none;
+          }
+        }
+        .right {
+          li {
+            color: $grey;
+            @include ipad {
+              color: #000;
+            }
+          }
+        }
+        .left,
+        .right {
+          mix-blend-mode: color-dodge;
+          z-index: 2;
+          @include ipad {
+            mix-blend-mode: unset;
+          }
+        }
       }
-      h2 {
-        color: #fff;
-        // width: 50%;
-        margin-bottom: 108px;
+      ul {
+        &:nth-child(2) {
+          margin-top: 20px;
+        }
       }
-      .bottom {
+      img {
+        position: absolute;
+        width: 700px;
+        height: 150px;
+        object-fit: cover;
+        object-position: bottom;
+        top: -170px;
+        // top: 235px;
+        left: 7.5%;
+      }
+    }
+  }
+  .process {
+    background: $brown;
+
+    h2,
+    h3,
+    p,
+    span {
+      color: rgba(192, 192, 192, 1);
+    }
+
+    .dates {
+      display: flex;
+      justify-content: space-between;
+      @include big-phone {
+        font-size: 12px;
+      }
+    }
+    .steps {
+      .step {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+
+        @include ipad {
+          flex-direction: column;
+        }
+
+        .start,
+        .launch {
+          position: absolute;
+          top: -30px;
+          font-size: 15px;
+          font-weight: bold;
+          @include ipad {
+            top: 20px;
+          }
+          @include big-phone {
+            font-size: 12px;
+          }
+        }
+        .start {
+          left: 57px;
+          @include ipad {
+            left: 0px;
+          }
+        }
+        .launch {
+          right: -32px;
+          @include ipad {
+            right: 0px;
+          }
+        }
+
+        &:nth-child(2),
+        &:last-child {
+          .straight {
+            .segment {
+              &:before {
+                content: "";
+                width: 15px;
+                height: 15px;
+                border-radius: 100%;
+                position: absolute;
+                display: inline-block;
+                background-color: #000;
+              }
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          .straight {
+            .segment {
+              &:before {
+                left: -8px;
+              }
+            }
+          }
+        }
+        &:last-child {
+          .straight {
+            .segment {
+              &:before {
+                right: -8px;
+              }
+            }
+          }
+        }
+
+        .straight {
+          position: relative;
+          height: 15px;
+          background: linear-gradient(
+            180deg,
+            $brown calc(50% - 1px),
+            rgba(192, 192, 192, 1) calc(50%),
+            $brown calc(50% + 1px)
+          );
+          .segment {
+            height: 100%;
+            background-color: rgba(192, 192, 192, 1);
+            width: 0;
+
+            &.animate {
+              animation-duration: 2s;
+              animation-fill-mode: forwards;
+              animation-delay: 0s;
+              animation-iteration-count: 1;
+              animation-timing-function: ease-in;
+              animation-direction: normal;
+              &.segment-1 {
+                // width: calc(100% * 2 / 5);
+                animation-name: fill-line-2;
+              }
+              &.segment-2 {
+                // width: calc(100% * 1 / 5);
+                animation-name: fill-line-1;
+              }
+              &.segment-3 {
+                // width: calc(100% * 1 / 5);
+                margin-left: calc(100% * 1 / 5);
+                animation-name: fill-line-1;
+              }
+              &.segment-4 {
+                // width: calc(100% * 2 / 5);
+                margin-left: calc(100% * 2 / 5);
+                animation-name: fill-line-2;
+              }
+              &.segment-5 {
+                // width: calc(100% * 2 / 5);
+                margin-left: calc(100% * 3 / 5);
+                animation-name: fill-line-2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .work-with-us {
+    h2 {
+      font-size: $h3;
+      @include big-phone {
+        font-size: $h4;
+      }
+    }
+    .left {
+      width: 20%;
+    }
+    .right {
+      width: 80%;
+      padding: 0;
+    }
+    .wrapper {
+      display: flex;
+      @include ipad {
+        flex-direction: column;
+      }
+      .works {
+        display: flex;
+        flex-wrap: wrap;
+
+        .work {
+          width: 33.333333%;
+          @include ipad {
+            width: 100%;
+          }
+          padding-left: 40px;
+          margin-bottom: 50px;
+          .top {
+            margin-bottom: 10px;
+            h3 {
+              position: relative;
+
+              &:before {
+                content: "";
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                position: absolute;
+                display: inline-block;
+                border: 8px solid #000;
+                left: -40px;
+
+                top: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .order-your-website,
+  .you-are-not-alone {
+    background: $green;
+    height: 600px;
+    .wrapper {
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      position: relative;
+
+      .title-group {
+        width: 40%;
+        position: absolute;
+        left: 0;
+        z-index: 2;
+        // top: -350px;
+        top: -400px;
         @include divi {
-          text-align: center;
+          top: -500px;
         }
         @include big-phone {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          top: -550px;
         }
-        .button {
-          &:first-child {
-            margin-right: 110px;
-            @include divi {
-              margin-right: 20px;
-            }
-            @include big-phone {
-              margin: 0;
+        h2,
+        h3 {
+          color: $pink;
+          text-align: right;
+          @include big-phone {
+            text-align: left;
+          }
+        }
+      }
+      .contact-us {
+        z-index: 1;
+        width: 63%;
+        position: absolute;
+        right: 0;
+        background: $white;
+        padding: 180px 80px;
+        display: flex;
+        top: -350px;
+        @include divi {
+          padding: 160px 60px;
+          flex-direction: column;
+        }
+        @include big-phone {
+          top: -100px;
+          padding: 25px;
+        }
+        p {
+          margin-bottom: 10px;
+        }
+        .left,
+        .right {
+          @include divi {
+            width: 100%;
+            padding: 0;
+            h3 {
               margin-bottom: 20px;
             }
           }
         }
       }
+      .title-group,
+      .contact-us {
+        position: absolute;
+        @include big-phone {
+          width: 100%;
+        }
+      }
     }
+  }
+  .you-are-not-alone {
+    background: transparent;
+    img {
+      width: 350px;
+      height: 467px;
+      top: -350px;
+      left: 22%;
+      position: absolute;
+    }
+    .wrapper {
+      .title-group {
+        // top: -400px;
+        top: -450px;
+        @include big-phone {
+          top: -550px;
+        }
+      }
+      .contact-us {
+        padding: 60px 80px;
+        top: -300px;
+        @include big-phone {
+          top: -200px;
+          padding: 25px;
+        }
+      }
+    }
+  }
+  .faq {
+    @include divi {
+      margin-top: 80px;
+    }
+    .wrapper {
+      display: flex;
+      .questions {
+        // display: flex;
+        // flex-direction: column;
+        // width: 66.666666%;
+        width: 70%;
+        @include divi {
+          width: 100%;
+        }
+        // padding-left: 60px;
+        .question {
+          display: flex;
+          margin-bottom: 20px;
+          @include ipad {
+            flex-direction: column;
+          }
+          .left {
+            width: 40%;
+            // padding-left: 60px;
+            align-items: center;
+            display: flex;
+            span {
+              // content: "?";
+              color: $green;
+              // margin-right: 50px;
+              font-family: $heading_font;
+              font-size: 66px;
+              position: absolute;
+            }
+            h3 {
+              padding-left: 60px;
+            }
+            // span,
+            // h3 {
+            //   display: inline-block;
+            // }
+          }
+          .right {
+            width: 60%;
+            padding-left: 30px;
+            @include ipad {
+              padding-left: 60px;
+            }
+          }
+          .left,
+          .right {
+            @include ipad {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .contact {
+    background: $pink;
+    position: relative;
+    height: 1000px;
+    padding-top: 250px;
+    @include big-phone {
+      height: 600px;
+      padding-top: 125px;
+    }
+    svg {
+      @include divi {
+        width: 300px;
+      }
+      @include big-phone {
+        width: 128px;
+        height: 100px;
+      }
+    }
+    form {
+      max-width: 600px;
+      width: 80%;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+      input,
+      textarea {
+        background: transparent;
+        border: none;
+        color: $white;
+        font-size: $h1;
+        &:not([type="submit"]) {
+          border-bottom: 1px solid $white;
+          width: 100%;
+        }
+        &::placeholder {
+          color: $white;
+        }
+        @include big-phone {
+          font-size: $h2;
+        }
+      }
+      textarea {
+        height: 300px;
+        @include big-phone {
+          height: 200px;
+        }
+      }
+      input[type="submit"] {
+        font-family: $body_font;
+        text-transform: lowercase;
+        font-size: 36px;
+        float: right;
+        @include big-phone {
+          font-size: 27px;
+        }
+      }
+    }
+    .contact-rect {
+      background-color: #dde8e2;
+      z-index: 1;
+      width: 100%;
+      position: absolute;
+      height: 850px;
+      left: 50%;
+      top: -550px;
+      padding-left: 30px;
+      box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.16);
+      @include divi {
+        top: -600px;
+      }
+      @include big-phone {
+        top: -575px;
+        height: 575px;
+      }
+    }
+  }
+  .creating-with-agoodpurpose {
+    .wrapper {
+      svg {
+        @include big-phone {
+          width: 300px;
+        }
+      }
+      .text {
+        display: flex;
+        margin-top: 40px;
+        position: relative;
+        // background: linear-gradient(
+        //   180deg,
+        //   rgba(0, 0, 0, 0) calc(50% - 1px),
+        //   rgba(0, 0, 0, 1) calc(50%),
+        //   rgba(0, 0, 0, 0) calc(50% + 1px)
+        // );
+        @include ipad {
+          flex-direction: column;
+        }
+        .line {
+          width: 100%;
+          height: 1px;
+          background: $black;
+          position: absolute;
+          top: 12px;
+          @include ipad {
+            display: none;
+          }
+        }
+        .third {
+          // width: calc(100% / 3);
+
+          &:nth-child(2),
+          &:nth-child(3) {
+            width: 25%;
+          }
+          &:nth-child(3),
+          &:nth-child(4) {
+            margin-left: 2.5%;
+          }
+          &:nth-child(4) {
+            width: 45%;
+          }
+
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(4) {
+            margin-left: 0;
+            width: 100%;
+            margin-bottom: 20px;
+          }
+
+          &:nth-child(4),
+          span {
+            z-index: 1;
+            padding: 0 10px;
+            position: relative;
+            background: white;
+            display: inline-block;
+          }
+          // span {
+
+          // }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fill-line-1 {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: calc(100% * 1 / 5);
+  }
+}
+
+@keyframes fill-line-2 {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: calc(100% * 2 / 5);
   }
 }

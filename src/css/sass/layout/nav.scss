@@ -5,40 +5,67 @@
  */
 
 .nav {
-  //   @include tablet {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  //   }
-  .menu {
-    display: inline-block;
-  }
-
-  ul {
-    display: inline-flex;
-    padding-left: 0;
-    // @include tablet {
+  padding-top: 20px;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  @include tablet {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // }
+  }
+  .menu {
+    display: inline-block;
+  }
+  ul {
+    display: flex;
+    // padding-left: 0;
+    flex-direction: column;
+    padding: 25px;
+    background: $brown;
+
+    @include tablet {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
     li.page_item,
     li.menu-item {
       display: inline-block;
-      //   @include min-tablet {
-      margin-right: 40px;
-      //   }
-      //   @include tablet {
-      margin-bottom: 20px;
-      //   }
+      @include min-tablet {
+        margin-right: 40px;
+      }
+      @include tablet {
+        // margin-bottom: 20px;
+        margin-bottom: 15px;
+      }
       a {
+        @include transition();
         font-size: $body;
         padding-bottom: 7px;
+        color: #fff;
+        opacity: 0.3;
       }
+
       &.current_page_item {
         a {
           border-bottom: solid 2px #9b7e2f;
+        }
+      }
+    }
+    li.no-click {
+      a {
+        pointer-events: none;
+        opacity: 0.16;
+      }
+    }
+    li.online {
+      a {
+        opacity: 0.68;
+        &:hover {
+          opacity: 1;
         }
       }
     }
