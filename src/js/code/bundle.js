@@ -13,12 +13,18 @@
 		// DOM ready, take it away
 		console.log("JS/JQ Ready v.1 ");
 
+		//show loader => seems useless
+
 		/* Loader */
 		$(window).on("load", function(e) {
 			scrollDis(e);
-			setTimeout(function() {
-				$(".loader").fadeOut("slow");
-			}, 5000);
+
+			setTimeout(() => {
+				$(".loader-rectangle").toggleClass("animate");
+				setTimeout(() => {
+					$(".loader").fadeOut("slow");
+				}, 250);
+			}, 4000);
 		});
 
 		let segments = document.querySelectorAll(".segment");
@@ -70,6 +76,11 @@
 		window.addEventListener("scroll", e => {
 			scrollDis(e);
 			animateLines();
+		});
+
+		$(".see-examples a, button.see-examples").click(e => {
+			e.preventDefault();
+			$(".navs_wrapper nav").toggleClass("active");
 		});
 
 		// $("#buy-tickets div.button").on("click", function(e, el) {

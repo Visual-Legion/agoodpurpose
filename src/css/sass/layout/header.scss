@@ -26,7 +26,8 @@
 .header_wrapper {
   height: 100px;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   max-width: $wrapper-width;
   margin-left: auto;
@@ -53,15 +54,21 @@
     @media screen and (min-width: 1281px) {
       // padding: 20px 0;
       padding-top: 20px;
+      position: relative;
     }
   }
 
   .logo {
     // display: none;
 
-    position: absolute;
-    @media screen and (max-width: 1279px) {
-      position: relative;
+    // position: absolute;
+    // @media screen and (max-width: 1279px) {
+    //   position: relative;
+    // }
+
+    @include min-ipad {
+      padding-top: 60px;
+      margin-right: auto;
     }
     @include ipad {
       position: absolute;
@@ -73,8 +80,16 @@
   }
 
   .navs_wrapper {
-    margin-left: auto;
+    // margin-left: auto;
     //tablet small menus, divi big menus
+    @include min-macbook {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      nav {
+        padding-top: 0;
+      }
+    }
     @media screen and (max-width: 1279px) {
       margin-right: auto;
       display: flex;
@@ -91,6 +106,7 @@
         // opacity: 0;
         height: 100vh;
         background-color: rgba(255, 255, 255, 0.95);
+        background: $brown;
         // filter: blur(10px);
         transition: left 0.4s ease-in-out;
         &.tablet_menu_active {
@@ -146,7 +162,8 @@ $translateX: 0;
     position: absolute;
     top: 40px;
     right: 45px;
-    top: 30px;
+    // top: 30px;
+    top: 45px;
   }
 
   // margin: ($height-icon * 2) auto $height-icon auto;

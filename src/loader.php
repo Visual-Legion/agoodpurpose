@@ -1,6 +1,6 @@
 <div class="loader parent">
     <div class="child">
-        <div class="animated-text-wrapper">
+        <div class="animated-text-wrapper loading">
             <span class="loader-we">we</span> <span class="loader-make">make</span> <span
                 class="loader-websites">websites</span> <span class="loader-for">for</span> <span
                 class="loader-yoga">yoga</span> <span class="loader-teachers">teachers</span> <span
@@ -9,3 +9,4 @@
         </div>
     </div>
 </div>
+<div class="loader-rectangle"></div>

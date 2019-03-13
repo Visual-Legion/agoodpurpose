@@ -30,10 +30,43 @@
 				/* Loader */
 				$(window).on("load", function (e) {
 					scrollDis(e);
-					// setTimeout(function() {
-					// 	$(".loader").fadeOut("slow");
-					// }, 500);
+					setTimeout(function () {
+						$(".loader").fadeOut("slow");
+					}, 5000);
 				});
+
+				var segments = document.querySelectorAll(".segment");
+				// let elementHeight = segments.clientHeight;
+				var segmentHeight = 15;
+
+				var inView = function inView(element) {
+					// get window height
+					var windowHeight = window.innerHeight;
+					// get number of pixels that the document is scrolled
+					var scrollY = window.scrollY || window.pageYOffset;
+
+					// get current scroll position (distance from the top of the page to the bottom of the current viewport)
+					var scrollPosition = scrollY + windowHeight;
+					// get element position (distance from the top of the page to the bottom of the element)
+					var elementPosition = element.getBoundingClientRect().top + scrollY + segmentHeight;
+
+					// is scroll position greater than element position? (is element in view?)
+					if (scrollPosition > elementPosition) {
+						return true;
+					}
+
+					return false;
+				};
+
+				var animateLines = function animateLines() {
+					// is element in view?
+					segments.forEach(function (element) {
+						if (inView(element)) {
+							// element is in view, add class to element
+							element.classList.add("animate");
+						}
+					});
+				};
 
 				var scrollDis = function scrollDis(e) {
 					var targets = document.querySelectorAll(".scroll");
@@ -41,14 +74,20 @@
 
 					targets.forEach(function (target) {
 						var pos = window.pageYOffset * target.dataset.rate;
-						console.log("target", target);
-						console.log("target.dataset.rate", target.dataset.rate);
+						// console.log("target", target);
+						// console.log("target.dataset.rate", target.dataset.rate);
 						target.style.transform = "translate3d(0px," + pos + "px,0px)";
 					});
 				};
 
 				window.addEventListener("scroll", function (e) {
 					scrollDis(e);
+					animateLines();
+				});
+
+				$(".see-examples a, button.see-examples").click(function (e) {
+					e.preventDefault();
+					$(".navs_wrapper nav").toggleClass("active");
 				});
 
 				// $("#buy-tickets div.button").on("click", function(e, el) {
