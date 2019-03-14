@@ -37,272 +37,6 @@ Color placeholder mixin
 /* absolute center vertically */
 /* absolute center horrziontally */
 /* absolute center both */
-/**
- * modules/fonts
- * ---
- * Declare fonts here
- */
-/*
-@font-face {
-  font-family: "Font-Name";
-  src: url("fonts/font-name.eot");
-  src: url("fonts/font-name.eot?#iefix") format("embedded-opentype"),
-    url("fonts/font-name.woff") format("woff"),
-    url("fonts/font-name.ttf") format("truetype"),
-    url("fonts/font-name.svg#font-name") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-*/
-/*!
- *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
-/* FONT PATH
- * -------------------------- */
-@font-face {
-  font-family: 'FontAwesome';
-  src: url("fonts/fontawesome-webfont.eot?v=4.7.0");
-  src: url("fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-/* roboto-regular - latin_latin-ext */
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: url("fonts/roboto-v18-latin_latin-ext-regular.eot");
-  /* IE9 Compat Modes */
-  src: local("Roboto"), local("Roboto-Regular"), url("fonts/roboto-v18-latin_latin-ext-regular.eot?#iefix") format("embedded-opentype"), url("fonts/roboto-v18-latin_latin-ext-regular.woff2") format("woff2"), url("fonts/roboto-v18-latin_latin-ext-regular.woff") format("woff"), url("fonts/roboto-v18-latin_latin-ext-regular.ttf") format("truetype"), url("fonts/roboto-v18-latin_latin-ext-regular.svg#Roboto") format("svg");
-  /* Legacy iOS */ }
-
-/* roboto-700 - latin_latin-ext */
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  src: url("fonts/roboto-v18-latin_latin-ext-700.eot");
-  /* IE9 Compat Modes */
-  src: local("Roboto Bold"), local("Roboto-Bold"), url("fonts/roboto-v18-latin_latin-ext-700.eot?#iefix") format("embedded-opentype"), url("fonts/roboto-v18-latin_latin-ext-700.woff2") format("woff2"), url("fonts/roboto-v18-latin_latin-ext-700.woff") format("woff"), url("fonts/roboto-v18-latin_latin-ext-700.ttf") format("truetype"), url("fonts/roboto-v18-latin_latin-ext-700.svg#Roboto") format("svg");
-  /* Legacy iOS */ }
-
-/* roboto-slab-regular - latin_latin-ext */
-@font-face {
-  font-family: 'Roboto Slab';
-  font-style: normal;
-  font-weight: 400;
-  src: url("fonts/roboto-slab-v7-latin_latin-ext-regular.eot");
-  /* IE9 Compat Modes */
-  src: local("Roboto Slab Regular"), local("RobotoSlab-Regular"), url("fonts/roboto-slab-v7-latin_latin-ext-regular.eot?#iefix") format("embedded-opentype"), url("fonts/roboto-slab-v7-latin_latin-ext-regular.woff2") format("woff2"), url("fonts/roboto-slab-v7-latin_latin-ext-regular.woff") format("woff"), url("fonts/roboto-slab-v7-latin_latin-ext-regular.ttf") format("truetype"), url("fonts/roboto-slab-v7-latin_latin-ext-regular.svg#RobotoSlab") format("svg");
-  /* Legacy iOS */ }
-
-/* roboto-slab-700 - latin_latin-ext */
-@font-face {
-  font-family: 'Roboto Slab';
-  font-style: normal;
-  font-weight: 700;
-  src: url("fonts/roboto-slab-v7-latin_latin-ext-700.eot");
-  /* IE9 Compat Modes */
-  src: local("Roboto Slab Bold"), local("RobotoSlab-Bold"), url("fonts/roboto-slab-v7-latin_latin-ext-700.eot?#iefix") format("embedded-opentype"), url("fonts/roboto-slab-v7-latin_latin-ext-700.woff2") format("woff2"), url("fonts/roboto-slab-v7-latin_latin-ext-700.woff") format("woff"), url("fonts/roboto-slab-v7-latin_latin-ext-700.ttf") format("truetype"), url("fonts/roboto-slab-v7-latin_latin-ext-700.svg#RobotoSlab") format("svg");
-  /* Legacy iOS */ }
-
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
-/* makes the font 33% larger relative to the icon container */
-.fa-lg {
-  font-size: 1.33333333em;
-  line-height: 0.75em;
-  vertical-align: -15%; }
-
-.fa-2x {
-  font-size: 2em; }
-
-.fa-3x {
-  font-size: 3em; }
-
-.fa-4x {
-  font-size: 4em; }
-
-.fa-5x {
-  font-size: 5em; }
-
-.fa-fw {
-  width: 1.28571429em;
-  text-align: center; }
-
-.fa-ul {
-  padding-left: 0;
-  margin-left: 2.14285714em;
-  list-style-type: none; }
-
-.fa-ul > li {
-  position: relative; }
-
-.fa-li {
-  position: absolute;
-  left: -2.14285714em;
-  width: 2.14285714em;
-  top: 0.14285714em;
-  text-align: center; }
-
-.fa-li.fa-lg {
-  left: -1.85714286em; }
-
-.fa-border {
-  padding: .2em .25em .15em;
-  border: solid 0.08em #eeeeee;
-  border-radius: .1em; }
-
-.fa-pull-left {
-  float: left; }
-
-.fa-pull-right {
-  float: right; }
-
-.fa.fa-pull-left {
-  margin-right: .3em; }
-
-.fa.fa-pull-right {
-  margin-left: .3em; }
-
-/* Deprecated as of 4.4.0 */
-.pull-right {
-  float: right; }
-
-.pull-left {
-  float: left; }
-
-.fa.pull-left {
-  margin-right: .3em; }
-
-.fa.pull-right {
-  margin-left: .3em; }
-
-.fa-spin {
-  -webkit-animation: fa-spin 2s infinite linear;
-  animation: fa-spin 2s infinite linear; }
-
-.fa-pulse {
-  -webkit-animation: fa-spin 1s infinite steps(8);
-  animation: fa-spin 1s infinite steps(8); }
-
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
-@keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
-
-.fa-rotate-90 {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg); }
-
-.fa-rotate-180 {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg); }
-
-.fa-rotate-270 {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-  -webkit-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg); }
-
-.fa-flip-horizontal {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-  -webkit-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-  transform: scale(-1, 1); }
-
-.fa-flip-vertical {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-  -webkit-transform: scale(1, -1);
-  -ms-transform: scale(1, -1);
-  transform: scale(1, -1); }
-
-:root .fa-rotate-90,
-:root .fa-rotate-180,
-:root .fa-rotate-270,
-:root .fa-flip-horizontal,
-:root .fa-flip-vertical {
-  filter: none; }
-
-.fa-stack {
-  position: relative;
-  display: inline-block;
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
-  vertical-align: middle; }
-
-.fa-stack-1x,
-.fa-stack-2x {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  text-align: center; }
-
-.fa-stack-1x {
-  line-height: inherit; }
-
-.fa-stack-2x {
-  font-size: 2em; }
-
-.fa-inverse {
-  color: #ffffff; }
-
-/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
-   readers do not read off random characters that represent icons */
-.fa-twitter-square:before {
-  content: "\f081"; }
-
-.fa-facebook-square:before {
-  content: "\f082"; }
-
-.fa-linkedin-square:before {
-  content: "\f08c"; }
-
-.fa-instagram:before {
-  content: "\f16d"; }
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0; }
-
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  clip: auto; }
-
 span.avoidwrap {
   display: inline-block; }
 
@@ -469,7 +203,8 @@ html,
 body {
   font-size: 18px;
   line-height: 1.7em;
-  color: #000; }
+  color: #000;
+  font-family: Poppins, sans-serif; }
   @media screen and (max-width: 600px) {
     html,
     body {
@@ -507,7 +242,7 @@ body {
   body h4 span,
   body h5 span,
   body h6 span {
-    font-family: BebasNeue, serif;
+    font-family: BebasNeue, "bebas-neue-v14-deprecated", serif;
     font-weight: 400;
     line-height: 1.25em; }
   body h1,
@@ -560,7 +295,7 @@ body {
   z-index: 9999;
   background: white;
   background-size: 100px;
-  font-family: BebasNeue, serif; }
+  font-family: BebasNeue, "bebas-neue-v14-deprecated", serif; }
   .loader.parent:before {
     display: none; }
   .loader .content_wrapper {
@@ -684,157 +419,157 @@ skew to change the 'thickness' of the glitch.*/ }
 
 @keyframes glitch-anim {
   0% {
-    clip: rect(20px, 9999px, 16px, 0);
-    transform: skew(0.73deg); }
+    clip: rect(77px, 9999px, 83px, 0);
+    transform: skew(0.99deg); }
   5% {
-    clip: rect(54px, 9999px, 84px, 0);
-    transform: skew(0.29deg); }
+    clip: rect(99px, 9999px, 54px, 0);
+    transform: skew(0.7deg); }
   10% {
-    clip: rect(66px, 9999px, 35px, 0);
-    transform: skew(0.27deg); }
-  15% {
-    clip: rect(30px, 9999px, 52px, 0);
-    transform: skew(0.9deg); }
-  20% {
-    clip: rect(5px, 9999px, 30px, 0);
-    transform: skew(0.52deg); }
-  25% {
-    clip: rect(11px, 9999px, 34px, 0);
+    clip: rect(34px, 9999px, 40px, 0);
     transform: skew(0.65deg); }
+  15% {
+    clip: rect(79px, 9999px, 75px, 0);
+    transform: skew(0.04deg); }
+  20% {
+    clip: rect(66px, 9999px, 5px, 0);
+    transform: skew(0.45deg); }
+  25% {
+    clip: rect(59px, 9999px, 8px, 0);
+    transform: skew(0.87deg); }
   30% {
-    clip: rect(74px, 9999px, 86px, 0);
-    transform: skew(0.4deg); }
+    clip: rect(64px, 9999px, 31px, 0);
+    transform: skew(0.18deg); }
   35% {
-    clip: rect(23px, 9999px, 52px, 0);
-    transform: skew(0.9deg); }
+    clip: rect(28px, 9999px, 3px, 0);
+    transform: skew(0.67deg); }
   40% {
-    clip: rect(74px, 9999px, 67px, 0);
-    transform: skew(0.62deg); }
+    clip: rect(63px, 9999px, 92px, 0);
+    transform: skew(0.91deg); }
   45% {
-    clip: rect(32px, 9999px, 26px, 0);
-    transform: skew(0.68deg); }
+    clip: rect(62px, 9999px, 10px, 0);
+    transform: skew(0.87deg); }
   50% {
-    clip: rect(32px, 9999px, 88px, 0);
-    transform: skew(0.09deg); }
+    clip: rect(76px, 9999px, 99px, 0);
+    transform: skew(0.52deg); }
   55% {
-    clip: rect(78px, 9999px, 81px, 0);
-    transform: skew(0.82deg); }
+    clip: rect(36px, 9999px, 3px, 0);
+    transform: skew(0.23deg); }
   60% {
-    clip: rect(23px, 9999px, 86px, 0);
-    transform: skew(0.54deg); }
+    clip: rect(82px, 9999px, 89px, 0);
+    transform: skew(0.29deg); }
   65% {
-    clip: rect(38px, 9999px, 59px, 0);
-    transform: skew(0.92deg); }
+    clip: rect(67px, 9999px, 18px, 0);
+    transform: skew(0.17deg); }
   70% {
-    clip: rect(59px, 9999px, 80px, 0);
-    transform: skew(0.9deg); }
+    clip: rect(45px, 9999px, 35px, 0);
+    transform: skew(0.68deg); }
   75% {
-    clip: rect(79px, 9999px, 10px, 0);
-    transform: skew(0.02deg); }
+    clip: rect(82px, 9999px, 88px, 0);
+    transform: skew(0.94deg); }
   80% {
-    clip: rect(41px, 9999px, 56px, 0);
-    transform: skew(0.63deg); }
+    clip: rect(89px, 9999px, 75px, 0);
+    transform: skew(0.51deg); }
   85% {
-    clip: rect(20px, 9999px, 34px, 0);
-    transform: skew(0.43deg); }
+    clip: rect(82px, 9999px, 12px, 0);
+    transform: skew(0.62deg); }
   90% {
-    clip: rect(23px, 9999px, 100px, 0);
-    transform: skew(0.3deg); }
+    clip: rect(78px, 9999px, 20px, 0);
+    transform: skew(1deg); }
   95% {
-    clip: rect(57px, 9999px, 92px, 0);
-    transform: skew(0.72deg); }
+    clip: rect(74px, 9999px, 92px, 0);
+    transform: skew(0.78deg); }
   100% {
-    clip: rect(87px, 9999px, 94px, 0);
-    transform: skew(0.3deg); } }
+    clip: rect(86px, 9999px, 51px, 0);
+    transform: skew(0.65deg); } }
 
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(14px, 9999px, 54px, 0);
-    transform: skew(0.41deg); }
+    clip: rect(24px, 9999px, 4px, 0);
+    transform: skew(0.16deg); }
   5% {
-    clip: rect(73px, 9999px, 43px, 0);
-    transform: skew(0.25deg); }
+    clip: rect(12px, 9999px, 24px, 0);
+    transform: skew(0.41deg); }
   10% {
-    clip: rect(51px, 9999px, 68px, 0);
-    transform: skew(0.91deg); }
+    clip: rect(76px, 9999px, 11px, 0);
+    transform: skew(0.68deg); }
   15% {
-    clip: rect(4px, 9999px, 100px, 0);
-    transform: skew(0.28deg); }
+    clip: rect(86px, 9999px, 33px, 0);
+    transform: skew(0.33deg); }
   20% {
-    clip: rect(64px, 9999px, 65px, 0);
-    transform: skew(0.13deg); }
+    clip: rect(37px, 9999px, 83px, 0);
+    transform: skew(0.91deg); }
   25% {
-    clip: rect(33px, 9999px, 93px, 0);
-    transform: skew(0.22deg); }
+    clip: rect(60px, 9999px, 83px, 0);
+    transform: skew(0.75deg); }
   30% {
-    clip: rect(44px, 9999px, 56px, 0);
-    transform: skew(0.56deg); }
+    clip: rect(26px, 9999px, 23px, 0);
+    transform: skew(0.16deg); }
   35% {
-    clip: rect(54px, 9999px, 29px, 0);
-    transform: skew(0.93deg); }
+    clip: rect(51px, 9999px, 18px, 0);
+    transform: skew(0.3deg); }
   40% {
-    clip: rect(26px, 9999px, 74px, 0);
-    transform: skew(0.18deg); }
+    clip: rect(12px, 9999px, 4px, 0);
+    transform: skew(0.35deg); }
   45% {
-    clip: rect(2px, 9999px, 66px, 0);
-    transform: skew(0.76deg); }
+    clip: rect(39px, 9999px, 58px, 0);
+    transform: skew(0.11deg); }
   50% {
-    clip: rect(87px, 9999px, 1px, 0);
-    transform: skew(0.24deg); }
+    clip: rect(22px, 9999px, 3px, 0);
+    transform: skew(0.54deg); }
   55% {
-    clip: rect(12px, 9999px, 28px, 0);
-    transform: skew(0.23deg); }
+    clip: rect(85px, 9999px, 20px, 0);
+    transform: skew(0.46deg); }
   60% {
-    clip: rect(9px, 9999px, 47px, 0);
-    transform: skew(0.85deg); }
+    clip: rect(37px, 9999px, 95px, 0);
+    transform: skew(0.56deg); }
   65% {
-    clip: rect(55px, 9999px, 36px, 0);
-    transform: skew(0.04deg); }
-  70% {
-    clip: rect(19px, 9999px, 30px, 0);
-    transform: skew(0.84deg); }
-  75% {
-    clip: rect(59px, 9999px, 8px, 0);
-    transform: skew(0.49deg); }
-  80% {
-    clip: rect(50px, 9999px, 69px, 0);
+    clip: rect(46px, 9999px, 84px, 0);
     transform: skew(0.77deg); }
+  70% {
+    clip: rect(97px, 9999px, 91px, 0);
+    transform: skew(0.22deg); }
+  75% {
+    clip: rect(22px, 9999px, 98px, 0);
+    transform: skew(0.41deg); }
+  80% {
+    clip: rect(55px, 9999px, 17px, 0);
+    transform: skew(0.2deg); }
   85% {
-    clip: rect(62px, 9999px, 51px, 0);
+    clip: rect(18px, 9999px, 87px, 0);
     transform: skew(0.07deg); }
   90% {
-    clip: rect(60px, 9999px, 20px, 0);
-    transform: skew(0.28deg); }
+    clip: rect(56px, 9999px, 11px, 0);
+    transform: skew(0.22deg); }
   95% {
-    clip: rect(100px, 9999px, 65px, 0);
-    transform: skew(0.85deg); }
+    clip: rect(5px, 9999px, 17px, 0);
+    transform: skew(0.65deg); }
   100% {
-    clip: rect(10px, 9999px, 63px, 0);
-    transform: skew(0.68deg); } }
+    clip: rect(77px, 9999px, 45px, 0);
+    transform: skew(0.3deg); } }
 
 @keyframes glitch-skew {
   0% {
-    transform: skew(-3deg); }
+    transform: skew(-4deg); }
   10% {
-    transform: skew(5deg); }
-  20% {
-    transform: skew(-1deg); }
-  30% {
     transform: skew(4deg); }
+  20% {
+    transform: skew(0deg); }
+  30% {
+    transform: skew(5deg); }
   40% {
-    transform: skew(-2deg); }
+    transform: skew(-3deg); }
   50% {
-    transform: skew(2deg); }
+    transform: skew(1deg); }
   60% {
     transform: skew(5deg); }
   70% {
-    transform: skew(2deg); }
+    transform: skew(3deg); }
   80% {
-    transform: skew(-3deg); }
+    transform: skew(4deg); }
   90% {
     transform: skew(-1deg); }
   100% {
-    transform: skew(1deg); } }
+    transform: skew(2deg); } }
 
 /* Like */
 .likebtn-wrapper.lb-style-custom .lb-like,
@@ -1622,6 +1357,17 @@ nav.active ul {
     nav.active ul li.online a:hover {
       opacity: 1; }
 
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing {
+  border: 2px solid #f7e700;
+  background: #f7e700;
+  color: white; }
+
+div.wpcf7-mail-sent-ok {
+  border: 2px solid #398f14;
+  background: #398f14;
+  color: white; }
+
 body a,
 body button,
 body input[type="button"],
@@ -1629,7 +1375,7 @@ body [type="submit"] {
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  font-family: BebasNeue, serif; }
+  font-family: BebasNeue, "bebas-neue-v14-deprecated", serif; }
   body a.button, body a.tribe-events-read-more,
   body button.button,
   body button.tribe-events-read-more,
@@ -2007,7 +1753,7 @@ body [type="submit"] {
           display: flex; }
           .home .faq .wrapper .questions .question .left span {
             color: #dde8e2;
-            font-family: BebasNeue, serif;
+            font-family: BebasNeue, "bebas-neue-v14-deprecated", serif;
             font-size: 66px;
             position: absolute; }
           .home .faq .wrapper .questions .question .left h3 {

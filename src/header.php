@@ -16,8 +16,8 @@
     <!-- <meta name="description" content="<?php //bloginfo('description'); ?>"> -->
 
 
-    <link rel="preload" href="https://use.typekit.net/aqo8mdw.css" as="style" crossorigin>
-    <link rel="stylesheet" href="https://use.typekit.net/aqo8mdw.css">
+    <link rel="preload" href="https://use.typekit.net/aqo8mdw.css" as="style" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.typekit.net/aqo8mdw.css" crossorigin="anonymous">
 
 
     <?php wp_head(); ?>

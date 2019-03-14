@@ -17,7 +17,7 @@
 		/* Loader */
 		$(window).on("load", function(e) {
 			scrollDis(e);
-
+			console.log("Window loaded ");
 			setTimeout(() => {
 				$(".loader-rectangle").toggleClass("animate");
 				setTimeout(() => {

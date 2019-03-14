@@ -120,6 +120,7 @@ body {
   font-size: $body;
   line-height: $line-height-base;
   color: $black;
+  font-family: $body_font;
   @include big-phone {
     font-size: $font-size-base-mobile;
     line-height: $line-height-base-mobile;

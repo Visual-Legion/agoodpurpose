@@ -27,12 +27,18 @@
 				// DOM ready, take it away
 				console.log("JS/JQ Ready v.1 ");
 
+				//show loader => seems useless
+
 				/* Loader */
 				$(window).on("load", function (e) {
 					scrollDis(e);
+					console.log("Window loaded ");
 					setTimeout(function () {
-						$(".loader").fadeOut("slow");
-					}, 5000);
+						$(".loader-rectangle").toggleClass("animate");
+						setTimeout(function () {
+							$(".loader").fadeOut("slow");
+						}, 250);
+					}, 4000);
 				});
 
 				var segments = document.querySelectorAll(".segment");
