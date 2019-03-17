@@ -1,5 +1,9 @@
 //F(x) = ( $wrapper-width - (n-1)$gutter-width ) / n
 
+iframe {
+  z-index: 100 !important;
+}
+
 .details {
   font-size: 16px;
   color: $grey;
@@ -121,6 +125,7 @@ body {
   line-height: $line-height-base;
   color: $black;
   font-family: $body_font;
+  // scroll-behavior: smooth;
   @include big-phone {
     font-size: $font-size-base-mobile;
     line-height: $line-height-base-mobile;

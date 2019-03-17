@@ -5,51 +5,55 @@
 			?>
 
 			<footer class="footer" role="contentinfo">
-			    <!-- <div class="footer__wrapper wrapper">
-			        <div class="column column-1">
-			            <p class="footer__title">Betalisboa</p>
-			            <p>FOLLOW US</p>
-			            <div class="icons">
-			                <a href="https://www.linkedin.com/company/visual-legion/"><i class="fa fa-linkedin-square"
-			                        aria-hidden="true"></i></a>
-			                <a href="https://www.facebook.com/visuallegionofficial/"><i class="fa fa-facebook-square"
-			                        aria-hidden="true"></i></a>
-			                <a href="https://twitter.com/visual_legion"><i class="fa fa-twitter-square"
-			                        aria-hidden="true"></i></a>
-			                <a href="https://www.instagram.com/visual_legion/"><i class="fa fa-instagram"
-			                        aria-hidden="true"></i></a>
+			    <div class="footer__wrapper wrapper">
+			        <nav>
+			            <div class="rel-wrapper">
+			                <a class="online" href="/#">Home</a>
 			            </div>
-			        </div>
-			        <div class="column column-2">
+			            <div class="rel-wrapper">
+			                <a>About Us</a>
+			                <div class="commings-soon-popup">
+			                    <div class="content">
+			                        <h3>Coming Soon!</h3>
+			                        <p>
+			                            We help conscious entrepreneurs build their business online. We are experts of the
+			                            digital,
+			                            we create software and products that allow conscious entrepreneurs to make their service
+			                            more
+			                            accessible to their customers. We help them have a greater impact.</p>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="rel-wrapper">
+			                <a>Media Library</a>
+			                <div class="commings-soon-popup">
+			                    <div class="content">
+			                        <h3>Coming Soon!</h3>
+			                        Sed posuere consectetur est at lobortis.
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="rel-wrapper">
+			                <a>Community</a>
+			                <div class="commings-soon-popup">
+			                    <div class="content">
+			                        <h3>Coming Soon!</h3>
+			                        Sed posuere consectetur est at lobortis.
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="rel-wrapper">
+			                <a class="online" href="/#contact">Contact</a>
+			            </div>
 
-			            <a href="#">About Us</a>
-			            <a href="#">About Us</a>
-			            <a href="#">About Us</a>
-			            <a href="#">About Us</a>
-			            <a href="#">About Us</a>
-			            <a href="#">About Us</a>
-			        </div>
-			        <div class="column column-3">
 
-			            <a href="#">Next Trainings</a>
-			            <a href="#">Next Trainings</a>
-			            <a href="#">Next Trainings</a>
-			            <a href="#">Next Trainings</a>
-			            <a href="#">Next Trainings</a>
-			            <a href="#">Next Trainings</a>
-			        </div>
-			        <div class="column column-4">
-			            <p>SIGN UP FOR THE NEWS LETTER</p>
-			            <form>
-			                <input placeholder="your@e-mail.com" type="email" />
-			                <input type="submit" value="Sign up" />
-			            </form>
-			        </div>
-			    </div> -->
+
+			        </nav>
+			    </div>
 			    <!-- copyright -->
 			    <!-- <div class="copyright">
 			        <p> We create for <a href="https://agoodpurpose.com">@agoodpurpose</a> </p>
-			    </div> -->
+			    </div>
 			    <!-- /copyright -->
 			</footer>
 			<!-- /footer -->

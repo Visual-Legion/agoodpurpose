@@ -301,9 +301,37 @@
                         you like </h3>
                 </div>
                 <div class="right">
-                    <p><a href="#">chat on messenger</a></p>
-                    <p><a href="#">send us an email</a></p>
-                    <p><a href="#">write us a message</a></p>
+                    <p><a class="messenger" href="#"><svg height="56.7px" id="Layer_1"
+                                style="enable-background:new 0 0 56.7 56.7;" version="1.1" viewBox="0 0 56.7 56.7"
+                                width="56.7px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Facebook_Messenger_1_">
+                                    <g>
+                                        <path
+                                            d="M28.4342,3.8416c-13.4521,0-24.3571,10.1599-24.3571,22.693c0,7.1415,3.5419,13.5115,9.0772,17.6713v8.6525l8.2934-4.5799    c2.2133,0.6163,4.5581,0.949,6.9866,0.949c13.4521,0,24.3571-10.1599,24.3571-22.693S41.8863,3.8416,28.4342,3.8416z     M30.8548,34.4015l-6.2027-6.6566l-12.1029,6.6566l13.3132-14.2209l6.354,6.6566l11.9516-6.6566L30.8548,34.4015z" />
+                                    </g>
+                                </g>
+                            </svg> chat on messenger</a></p>
+                    <p><a class="email" href="mailto:u.coates@gmail.com"><svg height="128px" id="Layer_1"
+                                style="enable-background:new 0 0 128 128;" version="1.1" viewBox="0 0 128 128"
+                                width="128px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g>
+                                    <path
+                                        d="M86.785,109.878   c-8.188,4.317-16.533,5.962-26.515,5.962c-24.428,0-45.133-17.879-45.133-46.479c0-30.687,21.299-57.201,54.376-57.201   c25.918,0,43.348,18.175,43.348,43.052c0,22.342-12.517,35.448-26.514,35.448c-5.968,0-11.475-4.021-11.025-13.105h-0.594   C69.514,86.342,62.66,90.66,53.721,90.66c-8.636,0-16.083-7-16.083-18.764c0-18.473,14.591-35.309,35.296-35.309   c6.403,0,12.067,1.34,15.937,3.13L83.813,66.68c-2.232,11.323-0.45,16.532,4.463,16.685c7.604,0.146,16.095-9.982,16.095-27.261   c0-21.602-12.964-37.09-36.06-37.09c-24.27,0-44.684,19.212-44.684,49.456c0,24.877,16.241,40.215,38.28,40.215   c8.491,0,16.387-1.783,22.499-5.21L86.785,109.878z M78.598,45.527c-1.493-0.449-4.027-1.043-7.446-1.043   c-13.112,0-23.689,12.366-23.689,26.812c0,6.556,3.275,11.322,9.836,11.322c8.637,0,16.532-11.025,18.169-20.256L78.598,45.527z"
+                                        style="fill:#2F3435;stroke:#2F3435;stroke-width:3;stroke-miterlimit:10;" />
+                                </g>
+                            </svg> send us an email</a></p>
+                    <p><a class="message" href="#contact"><svg id="Layer_1" style="enable-background:new 0 0 30 30;"
+                                version="1.1" viewBox="0 0 30 30" xml:space="preserve"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path
+                                    d="M16.189,16.521L27.463,6H2.537l11.273,10.521C14.477,17.145,15.523,17.145,16.189,16.521z" />
+                                <polygon points="8.906,14.68 1,7.301 1,22.586 " />
+                                <polygon points="21.094,14.68 29,22.586 29,7.301 " />
+                                <path
+                                    d="M19.631,16.045l-2.077,1.938c-0.717,0.669-1.636,1.003-2.555,1.003s-1.838-0.334-2.555-1.003l-2.077-1.938L2.414,24h25.172  L19.631,16.045z" />
+                            </svg> write us a message</a></p>
                 </div>
             </div>
         </div>
@@ -368,7 +396,7 @@
             </div>
         </div>
     </section>
-    <section class="contact">
+    <section class="contact" id="contact">
         <div class="wrapper">
             <?php echo do_shortcode('[contact-form-7 id="5" title="Contact form 1"]') ?>
             <div data-rate="0.08" class="contact-rect scroll">

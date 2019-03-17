@@ -84,7 +84,7 @@
     //tablet small menus, divi big menus
     @include min-macbook {
       position: fixed;
-      z-index: 100;
+      z-index: 101;
       top: 0;
       nav {
         padding-top: 0;

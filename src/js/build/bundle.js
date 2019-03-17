@@ -25,9 +25,8 @@
 
 			$(function () {
 				// DOM ready, take it away
-				console.log("JS/JQ Ready v.1 ");
-
-				//show loader => seems useless
+				console.log("JS/JQ Ready v.2 ");
+				// jQuery.scrollSpeed(200, 800);
 
 				/* Loader */
 				$(window).on("load", function (e) {
@@ -35,9 +34,16 @@
 					console.log("Window loaded ");
 					setTimeout(function () {
 						$(".loader-rectangle").toggleClass("animate");
+
+						//fadeout text whils square animation is playing
 						setTimeout(function () {
 							$(".loader").fadeOut("slow");
 						}, 250);
+
+						//show messenger chat 4secs after load animation has finished
+						setTimeout(function () {
+							$("footer").after("<div id='fb-root'></div>\n\t\t\t\t\t<script>(function(d, s, id) {\n\t\t\t\t\t  var js, fjs = d.getElementsByTagName(s)[0];\n\t\t\t\t\t  js = d.createElement(s); js.id = id;\n\t\t\t\t\t  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';\n\t\t\t\t\t  fjs.parentNode.insertBefore(js, fjs);\n\t\t\t\t\t}(document, 'script', 'facebook-jssdk'));</script>\n\t\t\t\t\t<div class='fb-customerchat'\n\t\t\t\t\t  attribution=\"wordpress\"\n\t\t\t\t\t  page_id='571666800020233'\n\t\t\t\t\t  theme_color='#dde8e2'\n\t\t\t\t  >\n\t\t\t\t\t>\n\t\t\t\t  </div>");
+						}, 4000);
 					}, 4000);
 				});
 
@@ -91,9 +97,15 @@
 					animateLines();
 				});
 
-				$(".see-examples a, button.see-examples").click(function (e) {
+				// $(".see-examples a, button.see-examples").click(e => {
+				// 	e.preventDefault();
+				// 	$(".navs_wrapper nav").toggleClass("active");
+				// });
+
+				// messenger
+				$("a.messenger").click(function (e) {
 					e.preventDefault();
-					$(".navs_wrapper nav").toggleClass("active");
+					jQuery(".fb_customer_chat_bounce_out_v2").removeClass("fb_customer_chat_bounce_out_v2").addClass("fb_customer_chat_bounce_in_v2").css("max-height", "100%");
 				});
 
 				// $("#buy-tickets div.button").on("click", function(e, el) {
@@ -394,48 +406,77 @@
 				/* Smooth anchor scroll from css-tricks */
 				// Select all links with hashes
 				// only tablet because of pagepiling
-				// $('a[href*="#"]')
-				// 	// Remove links that don't actually link to anything
-				// 	.not('[href="#"]')
-				// 	.not('[href="#0"]')
-				// 	.click(function(event) {
-				// 		// On-page links
-				// 		if (
-				// 			location.pathname.replace(/^\//, "") ==
-				// 				this.pathname.replace(/^\//, "") &&
-				// 			location.hostname == this.hostname
-				// 		) {
-				// 			// Figure out element to scroll to
-				// 			var target = $(this.hash);
-				// 			target = target.length
-				// 				? target
-				// 				: $("[name=" + this.hash.slice(1) + "]");
-				// 			// Does a scroll target exist?
-				// 			if (target.length) {
-				// 				// Only prevent default if animation is actually gonna happen
-				// 				event.preventDefault();
-				// 				$("html, body").animate(
-				// 					{
-				// 						scrollTop: target.offset().top
-				// 					},
-				// 					1000,
-				// 					function() {
-				// 						// Callback after animation
-				// 						// Must change focus!
-				// 						var $target = $(target);
-				// 						$target.focus();
-				// 						if ($target.is(":focus")) {
-				// 							// Checking if the target was focused
-				// 							return false;
-				// 						} else {
-				// 							$target.attr("tabindex", "-1"); // Adding tabindex for elements not focusable
-				// 							$target.focus(); // Set focus again
-				// 						}
-				// 					}
-				// 				);
-				// 			}
-				// 		}
-				// 	});
+				$('a[href*="#"]')
+				// Remove links that don't actually link to anything
+				.not('[href="#"]').not('[href="#0"]').click(function (event) {
+					// On-page links
+					if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) {
+						// Figure out element to scroll to
+						var target = $(this.hash);
+						target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
+						// Does a scroll target exist?
+						if (target.length) {
+							// Only prevent default if animation is actually gonna happen
+							event.preventDefault();
+							$("html, body").animate({
+								scrollTop: target.offset().top
+							}, 1000, function () {
+								// Callback after animation
+								// Must change focus!
+								var $target = $(target);
+								$target.focus();
+								if ($target.is(":focus")) {
+									// Checking if the target was focused
+									return false;
+								} else {
+									$target.attr("tabindex", "-1"); // Adding tabindex for elements not focusable
+									$target.focus(); // Set focus again
+								}
+							});
+						}
+					}
+				});
+
+				if (window.addEventListener) window.addEventListener("DOMMouseScroll", wheel, false);
+				window.onmousewheel = document.onmousewheel = wheel;
+
+				function wheel(event) {
+					var delta = 0;
+					if (event.wheelDelta) delta = event.wheelDelta / 120;else if (event.detail) delta = -event.detail / 3;
+
+					handle(delta);
+					if (event.preventDefault) event.preventDefault();
+					event.returnValue = false;
+				}
+
+				var goUp = true;
+				var end = null;
+				var interval = null;
+
+				function handle(delta) {
+					// var animationInterval = 20; //lower is faster
+					var animationInterval = 10; //lower is faster
+					var scrollSpeed = 10; //lower is faster
+
+					if (end == null) {
+						end = $(window).scrollTop();
+					}
+					end -= 40 * delta;
+					goUp = delta > 0;
+
+					if (interval == null) {
+						interval = setInterval(function () {
+							var scrollTop = $(window).scrollTop();
+							var step = Math.round((end - scrollTop) / scrollSpeed);
+							if (scrollTop <= 0 || scrollTop >= $(window).prop("scrollHeight") - $(window).height() || goUp && step > -1 || !goUp && step < 1) {
+								clearInterval(interval);
+								interval = null;
+								end = null;
+							}
+							$(window).scrollTop(scrollTop + step);
+						}, animationInterval);
+					}
+				}
 			});
 		})(undefined, jQuery);
 	}, {}] }, {}, [1]);

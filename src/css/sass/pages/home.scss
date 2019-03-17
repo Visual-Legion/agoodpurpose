@@ -425,6 +425,17 @@
             }
           }
         }
+        .right {
+          a {
+            display: flex;
+            align-items: center;
+            svg {
+              margin-right: 5px;
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
       }
       .title-group,
       .contact-us {

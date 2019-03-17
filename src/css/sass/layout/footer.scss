@@ -1,178 +1,75 @@
-// /**
-//  * partials/footer
-//  * ---
-//  */
+/**
+ * partials/footer
+ * ---
+ */
 
-// .footer {
-//   background-color: $light-grey;
-//   color: $black;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
+.footer {
+  //   background-color: $light-grey;
+  color: $black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1px solid $black;
+  a {
+    color: inherit;
+    letter-spacing: 3px;
+  }
+  .footer__wrapper {
+    max-width: $wrapper-width;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-self: center;
 
-//   a {
-//     color: inherit;
-//   }
+      .rel-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        // justify-content: flex-start;
+        align-items: center;
+      }
 
-//   .footer__wrapper {
-//     display: flex;
-//     justify-content: space-between;
-//     max-width: $wrapper-width;
-//     align-items: flex-start;
-//     align-self: center;
-//     @include divi {
-//       // flex-direction: column;
-//       flex-wrap: wrap;
-//       align-items: center;
-//       justify-content: center;
-//     }
-//     .column {
-//       display: flex;
-//       flex-direction: column;
-//       @include divi {
-//         flex-basis: 50%;
-//       }
-//       @include big-phone {
-//         flex-basis: 100%;
-//       }
-//       p:not(.footer__title) {
-//         font-size: 12px;
-//       }
-//       &.column-4 {
-//         width: 35%;
-//       }
-//     }
+      .commings-soon-popup {
+        @include transition();
+        opacity: 0;
+        position: absolute;
+        width: 300px;
+        background: #fff;
+        padding: 10px;
+        cursor: default;
+        .content {
+          font-size: 15px;
+        }
+      }
 
-//     form {
-//       display: flex;
-//       justify-content: center;
-//       input {
-//         border: solid 1px $black;
-//         background: transparent;
-//         // height: 48px;
-//         &[type="text"],
-//         &[type="email"] {
-//           padding: 8px;
-//           border-right: 0;
-//           font-size: 12px;
-//           width: 100%;
-//           // max-width:
-//           @include ipad {
-//             width: 180px;
-//           }
-//           &::placeholder {
-//             color: #a7b0b8;
-//           }
-//         }
-//         &[type="submit"] {
-//           text-transform: uppercase;
-//           padding: 8px 20px;
-//         }
-//       }
-//     }
+      a {
+        position: relative;
+        z-index: 1;
+        @include transition();
+        &:not(.online) {
+          opacity: 0.1;
+          // pointer-events: none;
+          cursor: default;
+          &:hover {
+            opacity: 0;
+            + .commings-soon-popup {
+              opacity: 1;
+            }
+          }
+        }
+        &:hover {
+          color: $accent-color;
+          opacity: 0.7;
+        }
+      }
 
-//     // .logo_wraper {
-//     //   align-self: center;
-//     //   // margin-top: 42px;
-//     //   // margin-bottom: 42px;
-//     //   @include divi {
-//     //     margin-top: 42px;
-//     //   }
-//     //   @include phone {
-//     //     margin-top: 10px;
-//     //   }
-//     //   img {
-//     //     width: 256px;
-//     //   }
-//     // }
-
-//     h4 {
-//       margin-bottom: 42px;
-//       margin-top: 42px;
-//       @include divi {
-//         margin-bottom: 21px;
-//         margin-top: 21px;
-//       }
-//     }
-
-//     a,
-//     p {
-//       margin-bottom: 20px;
-//     }
-//     .icons {
-//       margin-bottom: 20px;
-//       a {
-//         font-size: 21px;
-//         @include divi {
-//           &:not(:last-child) {
-//             margin-right: 15px;
-//           }
-//         }
-//       }
-
-//       @include divi {
-//         text-align: center;
-//       }
-
-//       // display: flex;
-//       // flex-direction: row;
-//       // justify-content: center;
-//       // align-items: center;
-
-//       // @include min-divi {
-//       //   margin-left: 10px;
-//       // }
-//       // a {
-//       //   display: flex;
-//       //   flex-direction: row;
-//       //   justify-content: center;
-//       //   align-items: center;
-//       //   padding: 0;
-//       // }
-//       // i {
-//       //   margin-left: 10px;
-//       //   margin-right: 10px;
-//       //   color: #ffffff;
-//       //   width: 18px;
-//       //   height: 18px;
-//       //   border-radius: 100%;
-//       //   position: relative;
-//       //   &:before {
-//       //     @include absolute_center_both();
-//       //     font-size: $h3;
-//       //   }
-//       //   // &.fa-facebook{
-//       //   // 	background-color:#3B5998;
-//       //   // 	&:before{
-//       //   // 		left: 46%;
-//       //   // 		top: 50%;
-//       //   // 	}
-//       //   // }
-//       //   // &.fa-twitter{
-//       //   // 	background-color:#55ACEE;
-//       //   // 	&:before{
-//       //   // 		left: 48%;
-//       //   // 		top: 48%;
-//       //   // 	}
-//       //   // }
-//       // }
-//     }
-//   }
-//   .copyright {
-//     background-color: #052238;
-//     color: $light-grey;
-//     font-size: $body;
-//     padding: 13px 45px;
-//     font-size: 18px;
-//     a {
-//       font-size: 18px;
-//       transition: all 0.4s ease-in-out;
-//       color: inherit;
-//       font-weight: bold;
-//       &:hover {
-//         color: #ffffff;
-//         cursor: pointer;
-//       }
-//     }
-//   }
-// }
+      @include divi {
+        // flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
