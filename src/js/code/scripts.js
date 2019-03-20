@@ -5,13 +5,14 @@
 // const {cookie} = require('./cookie');
 // const {contact} = require('./contact');
 
+const { SmoothScrolling } = require("./SmoothScrolling");
+
 (function(root, $, undefined) {
 	"use strict";
 
 	$(() => {
 		// DOM ready, take it away
-		console.log("JS/JQ Ready v.2 ");
-		// jQuery.scrollSpeed(200, 800);
+		console.log("JS/JQ Ready v.5 ");
 
 		/* Loader */
 		$(window).on("load", function(e) {
@@ -27,26 +28,14 @@
 
 				//show messenger chat 4secs after load animation has finished
 				setTimeout(() => {
-					$("footer").after(`<div id='fb-root'></div>
-					<script>(function(d, s, id) {
-					  var js, fjs = d.getElementsByTagName(s)[0];
-					  js = d.createElement(s); js.id = id;
-					  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
-					  fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));</script>
-					<div class='fb-customerchat'
-					  attribution="wordpress"
-					  page_id='571666800020233'
-					  theme_color='#dde8e2'
-				  >
-					>
-				  </div>`);
+					const {
+						FacebookMessenger
+					} = require("./FacebookMessenger");
 				}, 4000);
 			}, 4000);
 		});
 
 		let segments = document.querySelectorAll(".segment");
-		// let elementHeight = segments.clientHeight;
 		let segmentHeight = 15;
 
 		let inView = element => {
@@ -232,40 +221,6 @@
 			hamburger.toggleClass("active");
 		});
 
-		/****************************/
-		/* Mockup scroll animations */
-		/****************************/
-
-		// var top_imac_svg = $('.md-imac .md-screen svg');
-		// var top_imac_svg_size = $('.md-imac .md-screen svg').height();
-		// var top_imac_size = $('.md-imac .md-screen').height();
-		// var top_imac_toScroll = top_imac_svg_size - top_imac_size;
-
-		// (function topImacScrollUpDownloop() {
-
-		// 	console.log('dqdqsdsqdqdqs');
-
-		// 	$('.md-imac .md-screen svg').animate({
-
-		// 		step: (now, fx) => {
-		// 			console.log('$(this)', $(this));
-		// 			$(this).css('transform', 'translateY(-' + top_imac_size + ')');
-		// 		}
-		// 	}, { //.animate takes 2 args: direction, distance in px
-		// 		duration: 3000, //duration is ms
-		// 		complete: function() {
-		// 			$('.md-imac .md-screen svg').animate({
-		// 				step: (now, fx) => {
-		// 					$(this).css('transform', 'translateY(0)');
-		// 				}
-		// 			}, {
-		// 				duration: 3000,
-		// 				complete: topImacScrollUpDownloop
-		// 			});
-		// 		}
-		// 	});
-		// })();
-
 		/*Show more events*/
 
 		// setTimeout(() => {
@@ -405,100 +360,35 @@
 		// 	});
 		// });
 
-		/* Smooth anchor scroll from css-tricks */
-		// Select all links with hashes
-		// only tablet because of pagepiling
-		$('a[href*="#"]')
-			// Remove links that don't actually link to anything
-			.not('[href="#"]')
-			.not('[href="#0"]')
-			.click(function(event) {
-				// On-page links
-				if (
-					location.pathname.replace(/^\//, "") ==
-						this.pathname.replace(/^\//, "") &&
-					location.hostname == this.hostname
-				) {
-					// Figure out element to scroll to
-					var target = $(this.hash);
-					target = target.length
-						? target
-						: $("[name=" + this.hash.slice(1) + "]");
-					// Does a scroll target exist?
-					if (target.length) {
-						// Only prevent default if animation is actually gonna happen
-						event.preventDefault();
-						$("html, body").animate(
-							{
-								scrollTop: target.offset().top
-							},
-							1000,
-							function() {
-								// Callback after animation
-								// Must change focus!
-								var $target = $(target);
-								$target.focus();
-								if ($target.is(":focus")) {
-									// Checking if the target was focused
-									return false;
-								} else {
-									$target.attr("tabindex", "-1"); // Adding tabindex for elements not focusable
-									$target.focus(); // Set focus again
-								}
-							}
-						);
-					}
+		var $root = $("html, body");
+		$("a").on("click", function(event) {
+			var hash = this.hash;
+			// Is the anchor on the same page?
+			if (
+				hash &&
+				this.href.slice(0, -hash.length - 1) ==
+					location.href.slice(0, -location.hash.length - 1)
+			) {
+				var scrollTo = $(hash).offset().top;
+				var bodyHeight = $("body").height();
+				var windowHeight = $(window).height();
+				if (bodyHeight - windowHeight < scrollTo) {
+					scrollTo = bodyHeight - windowHeight;
 				}
-			});
 
-		if (window.addEventListener)
-			window.addEventListener("DOMMouseScroll", wheel, false);
-		window.onmousewheel = document.onmousewheel = wheel;
-
-		function wheel(event) {
-			var delta = 0;
-			if (event.wheelDelta) delta = event.wheelDelta / 120;
-			else if (event.detail) delta = -event.detail / 3;
-
-			handle(delta);
-			if (event.preventDefault) event.preventDefault();
-			event.returnValue = false;
-		}
-
-		var goUp = true;
-		var end = null;
-		var interval = null;
-
-		function handle(delta) {
-			// var animationInterval = 20; //lower is faster
-			var animationInterval = 10; //lower is faster
-			var scrollSpeed = 10; //lower is faster
-
-			if (end == null) {
-				end = $(window).scrollTop();
-			}
-			end -= 40 * delta;
-			goUp = delta > 0;
-
-			if (interval == null) {
-				interval = setInterval(function() {
-					var scrollTop = $(window).scrollTop();
-					var step = Math.round((end - scrollTop) / scrollSpeed);
-					if (
-						scrollTop <= 0 ||
-						scrollTop >=
-							$(window).prop("scrollHeight") -
-								$(window).height() ||
-						(goUp && step > -1) ||
-						(!goUp && step < 1)
-					) {
-						clearInterval(interval);
-						interval = null;
-						end = null;
+				$root.animate(
+					{
+						scrollTop: scrollTo
+					},
+					"normal",
+					function() {
+						location.hash = hash;
+						// console.log("done");
+						setTimeout(() => {}, 1000);
 					}
-					$(window).scrollTop(scrollTop + step);
-				}, animationInterval);
+				);
+				return false;
 			}
-		}
+		});
 	});
 })(undefined, jQuery);

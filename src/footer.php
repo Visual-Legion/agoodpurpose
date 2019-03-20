@@ -16,11 +16,9 @@
 			                    <div class="content">
 			                        <h3>Coming Soon!</h3>
 			                        <p>
-			                            We help conscious entrepreneurs build their business online. We are experts of the
-			                            digital,
-			                            we create software and products that allow conscious entrepreneurs to make their service
-			                            more
-			                            accessible to their customers. We help them have a greater impact.</p>
+			                            We help conscious entrepreneurs build their business online and spread wellness. We
+			                            create software and products that allow conscious entrepreneurs to make their service
+			                            more accessible to their customers.</p>
 			                    </div>
 			                </div>
 			            </div>

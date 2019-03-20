@@ -4,7 +4,7 @@
 	get_header();
 ?>
 
-<main class="home" role="main" aria-label="Content">
+<main class="home main" role="main" aria-label="Content">
     <!-- section -->
 
     <section class="website-features">
@@ -21,38 +21,42 @@
                     </div>
                     <div class="right">
                         <ul>
+                            <li>Event booking </li>
                             <li>Appointments scheduling</li>
-                            <li>Shop & cart</li>
-                            <li>Event system</li>
-                            <li>Membership/subscriptions space (or ressource page locked with pass)</li>
-                            <li>Coupon option for all services sold</li>
+                            <li>Shop and cart</li>
                             <li>Calendar</li>
+                            <li>Media library</li>
+                            <li>Offline memberships to your offline services</li>
+                            <li>Online subscriptions to your online services</li>
+                            <li>Coupons option for all services sold</li>
+
                         </ul>
                     </div>
                 </div>
                 <div class="feature over-eye">
                     <div class="left">
-                        <h3>Comes on all our websites</h3>
+                        <h3>Comes with all our websites</h3>
                     </div>
                     <div class="right">
                         <ul>
                             <li>Beautiful design, branded</li>
                             <li>Optimized for mobile & Tablet</li>
-                            <li>Wordpress interface</li>
-                            <li>Custom domain</li>
+                            <li>Based on WordPress so you are in control</li>
                             <li>SEO friendly</li>
-                            <li>https security</li>
+                            <li>Https security</li>
                         </ul>
                     </div>
                 </div>
                 <div class="feature over-eye">
                     <div class="left">
-                        <h3>Included functionalities</h3>
+                        <h3>Included too</h3>
                     </div>
                     <div class="right">
                         <ul>
                             <li>Social media integration</li>
+                            <li>Instagram feed integration</li>
                             <li>Contact information & form</li>
+                            <li>Pop up chat linked to Facebook page</li>
                             <li>Blog</li>
                         </ul>
                     </div>
@@ -86,12 +90,11 @@
                     <div class="right">
                         <ul>
                             <li><b>allow your customers to</b></li>
-                            <li>book & register for private & group classes</li>
-                            <li>book & register for events & workshops</li>
-                            <li>register for online workshops and coaching plans</li>
-                            <li>Buy products on your online shop</li>
-                            <li>pay online</li>
-                            <li>contact you with ease</li>
+                            <li>Book your services 24/7, on desktop or mobile</li>
+                            <li>book & register for private and group classes</li>
+                            <li>book & register for workshops, courses, coaching plans (online and offline).</li>
+                            <li>Pay or make deposits online securely</li>
+                            <li>Stay on track with Google calendar Sync</li>
                         </ul>
                         <ul>
                             <li><b>retain your customers with</b> </li>
@@ -123,8 +126,8 @@
                     </div>
                     <div class="right">
                         <ul>
-                            <li>allow your customers to navigate on the go, our websites are optimized for mobile &
-                                tablet </li>
+                            <li>Allow your customers to book you 24/7, our websites are optimized for tablet and mobile.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -322,7 +325,7 @@
                                         style="fill:#2F3435;stroke:#2F3435;stroke-width:3;stroke-miterlimit:10;" />
                                 </g>
                             </svg> send us an email</a></p>
-                    <p><a class="message" href="#contact"><svg id="Layer_1" style="enable-background:new 0 0 30 30;"
+                    <p><a class="message" href="/#contact"><svg id="Layer_1" style="enable-background:new 0 0 30 30;"
                                 version="1.1" viewBox="0 0 30 30" xml:space="preserve"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <path
@@ -351,9 +354,10 @@
                     </h3>
                 </div>
                 <div class="right">
-                    <p>3 hours support/5 changes a month</p>
-                    <p>Updates & fixes</p>
-                    <p>Monthly Performance analytic reports</p>
+                    <p>Professional support including: adding, editing or modifying the website content, Website
+                        monitoring, Website quality checks</p>
+                    <p>Professional photo editing</p>
+                    <p>Monthly Performance analytic reports to learn more about your website performance</p>
                     <p>30 minutes coaching a month</p>
                 </div>
             </div>
@@ -385,12 +389,13 @@
                 <div class="question">
                     <div class="left">
                         <span>?</span>
-                        <h3>why adopting you as my digital partner?</h3>
+                        <h3>why adopting us as your digital partners?</h3>
                     </div>
                     <div class="right">
-                        <p>Your website is like a car, it needs to be maintained and taken care of, plus if you are busy
-                            and
-                            feel you're getting crazy with all this online stuff, we're here to take care of it.</p>
+                        <p>Your website needs to be maintained by adding or updating its content to keep your user
+                            engaged and stay listed on the search engines. You also need to make sure it runs smoothly
+                            at all times – if you are busy and feel you're getting crazy with all this online stuff,
+                            we're here to take care of it.</p>
                     </div>
                 </div>
             </div>
