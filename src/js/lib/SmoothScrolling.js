@@ -29,8 +29,8 @@ var SmoothScrolling = {
 			var defaultOptions = {
 				// Scrolling Core
 				frameRate: 150, // [Hz]
-				animationTime: 400, // [ms]
-				stepSize: 100, // [px]
+				animationTime: 700, // [ms]
+				stepSize: 200, // [px]
 
 				// Pulse (less tweakable)
 				// ratio of "tail" to "acceleration"
@@ -322,6 +322,8 @@ var SmoothScrolling = {
 			 * @param {Object} event
 			 */
 			function wheel(event) {
+				// console.log("wheeling");
+
 				if (!initDone) {
 					init();
 				}

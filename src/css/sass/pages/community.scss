@@ -1,0 +1,221 @@
+.community {
+  // overflow-x: hidden;
+
+  .back {
+    z-index: 10;
+  }
+
+  .header {
+    position: absolute;
+    z-index: 2;
+    h1 {
+      color: $white;
+    }
+  }
+  section {
+    position: relative;
+
+    // @include min-ipad {
+    //   padding-left: 27px;
+    //   padding-right: 27px;
+    // }
+    .background-image {
+      object-fit: cover;
+      object-position: center;
+      will-change: auto;
+      @include absolute-fill;
+      height: 80vh;
+      @include min-ipad {
+        left: 27px;
+        width: calc(100% - 54px);
+      }
+      @include ipad {
+        height: 100vh;
+      }
+    }
+  }
+  .wrapper {
+    z-index: 2;
+    .top-titles {
+      @include big-phone {
+        // height: 100vh;
+        height: calc(100vh - 80px);
+      }
+      h1 {
+        padding-top: 162px;
+        @include divi {
+          padding-top: 108px;
+        }
+      }
+    }
+    h1 {
+      color: $pink;
+      margin-bottom: 40px;
+
+      //   @include min-big-phone {
+
+      //   }
+      @include big-phone {
+        font-size: 50px;
+      }
+    }
+    h3 {
+      font-family: $body_font;
+      color: $white;
+      margin-bottom: 60px;
+      width: 45%;
+      text-shadow: 0 0 50px #000;
+      @include ipad {
+        width: 100%;
+      }
+      @include big-phone {
+        font-size: $body;
+      }
+    }
+    .community-rectangle {
+      display: flex;
+      padding: 54px 54px 54px 54px;
+      // padding: 54px;
+      background-color: $white;
+      // @include macbook {
+      //   padding-left: 27px;
+      //   padding-right: 27px;
+      //   padding-top: 27px;
+      // }
+
+      // @include min-divi {
+      //   position: absolute;
+      //   height: 100vh;
+      // }
+
+      @include big-phone {
+        padding: 54px 0 0 0;
+      }
+
+      @include divi {
+        flex-direction: column;
+      }
+
+      .left {
+        width: 30%;
+        a {
+          svg {
+            @include phone {
+              top: 5px;
+            }
+          }
+        }
+      }
+      .center {
+        width: 50%;
+        @include min-divi {
+          padding: 0 54px;
+        }
+
+        a {
+          svg {
+            @include phone {
+              top: 2px;
+            }
+          }
+        }
+
+        // @include ipad {
+        //   padding: 0 27px;
+        // }
+        .contact {
+          form {
+            padding: 27px 0;
+
+            width: 100%;
+            input,
+            textarea {
+              color: $black;
+              font-size: $body;
+              &:not([type="submit"]) {
+                border-bottom: 1px solid $black;
+              }
+              &::placeholder {
+                color: $black;
+              }
+            }
+          }
+        }
+      }
+      .right {
+        width: 20%;
+      }
+
+      .left,
+      .center,
+      .right {
+        @include divi {
+          width: 100%;
+          margin-bottom: 27px;
+        }
+      }
+
+      .support {
+        display: none;
+        @include ipad {
+          display: block;
+        }
+      }
+
+      .details {
+        color: $black;
+        @include divi {
+          padding-left: 40px;
+          margin-bottom: 15px;
+        }
+      }
+      a {
+        display: flex;
+        align-items: center;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        padding-left: 40px;
+        @include big-phone {
+          font-size: $body;
+        }
+        &.mail {
+          svg {
+            width: 28px;
+            height: 28px;
+          }
+        }
+        svg {
+          //   margin-right: 15px;
+          position: absolute;
+          left: 0;
+          //   top: 0;
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  }
+  .back {
+    @include min-ipad {
+      position: relative;
+    }
+    // @include divi {
+    //   position: relative;
+    // }
+    // @include ipad {
+    //   position: absolute;
+    // }
+    .back-wrapper {
+      @include min-ipad {
+        span {
+          color: $black;
+        }
+        svg {
+          line {
+            stroke: $black;
+          }
+        }
+      }
+    }
+  }
+}

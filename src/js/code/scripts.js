@@ -5,35 +5,415 @@
 // const {cookie} = require('./cookie');
 // const {contact} = require('./contact');
 
-const { SmoothScrolling } = require("./SmoothScrolling");
+// const { SmoothScrolling } = require("../lib/SmoothScrolling");
+
+const scrollDis = e => {
+	const targets = document.querySelectorAll(".scroll");
+	var scrolled = window.pageYOffset;
+
+	targets.forEach(target => {
+		let pos = window.pageYOffset * target.dataset.rate;
+		// console.log("target", target);
+		// console.log("target.dataset.rate", target.dataset.rate);
+		target.style.transform = "translate3d(0px," + pos + "px,0px)";
+	});
+};
 
 (function(root, $, undefined) {
 	"use strict";
 
 	$(() => {
 		// DOM ready, take it away
-		console.log("JS/JQ Ready v.5 ");
+		console.log("DOM Ready v.3");
 
-		/* Loader */
-		$(window).on("load", function(e) {
-			scrollDis(e);
-			console.log("Window loaded ");
-			setTimeout(() => {
-				$(".loader-rectangle").toggleClass("animate");
+		/**
+		 *
+		 */
 
-				//fadeout text whils square animation is playing
-				setTimeout(() => {
-					$(".loader").fadeOut("slow");
-				}, 250);
+		/*!
+		 * luxy.js v0.1.0: Inertia scroll and parallax effect plugin in Vanilla.js
+		 * (c) 2018 Mineo Okuda
+		 * MIT License
+		 * git+ssh://git@github.com:min30327/luxy.js.git
+		 */
 
-				//show messenger chat 4secs after load animation has finished
-				setTimeout(() => {
-					const {
-						FacebookMessenger
-					} = require("./FacebookMessenger");
-				}, 4000);
-			}, 4000);
-		});
+		/**
+		 * Written by Mineo Okuda on 01/03/18.
+		 *
+		 * Mineo Okuda - development + design
+		 * https://willstyle.co.jp
+		 * https://github.com/min30327
+		 *
+		 * MIT license.
+		 */
+		setTimeout(() => {
+			(function(root, factory) {
+				"use strict";
+
+				if (typeof define === "function" && define.amd) {
+					// AMD. Register as an anonymous module.
+					define([], factory);
+				} else if (typeof exports === "object") {
+					// COMMONJS
+					module.exports = factory();
+				} else {
+					// BROWSER
+					root.luxy = factory();
+				}
+			})(this, function() {
+				"use strict";
+
+				var defaults = {
+					wrapper: "#luxy",
+					targets: ".luxy-el",
+					wrapperSpeed: 0.08,
+					targetSpeed: 0.02,
+					targetPercentage: 0.1
+				};
+
+				var requestAnimationFrame =
+					window.requestAnimationFrame ||
+					window.mozRequestAnimationFrame ||
+					window.webkitRequestAnimationFrame ||
+					window.msRequestAnimationFrame;
+				window.requestAnimationFrame = requestAnimationFrame;
+				var cancelAnimationFrame =
+					window.cancelAnimationFrame ||
+					window.mozCancelAnimationFrame;
+
+				/**
+				 * Merge two or more objects. Returns a new object.
+				 * @param {Object}   objects  The objects to merge together
+				 * @returns {Object}          Merged values of defaults and options
+				 */
+				var extend = function() {
+					// Variables
+					var extended = {};
+					var deep = false;
+					var i = 0;
+					var length = arguments.length;
+
+					// Merge the object into the extended object
+					var merge = function(obj) {
+						for (var prop in obj) {
+							if (obj.hasOwnProperty(prop)) {
+								extended[prop] = obj[prop];
+							}
+						}
+					};
+
+					// Loop through each object and conduct a merge
+					for (; i < length; i++) {
+						var obj = arguments[i];
+						merge(obj);
+					}
+
+					return extended;
+				};
+
+				var Luxy = function() {
+					this.Targets = [];
+					this.TargetsLength = 0;
+					this.wrapper = "";
+					this.windowHeight = 0;
+					this.wapperOffset = 0;
+				};
+				Luxy.prototype = {
+					isAnimate: false,
+					isResize: false,
+					scrollId: "",
+					resizeId: "",
+					init: function(options) {
+						this.settings = extend(defaults, options || {});
+						console.log("this.settings", this.settings);
+						this.wrapper = document.querySelector(
+							this.settings.wrapper
+						);
+
+						if (this.wrapper === "undefined") {
+							return false;
+						}
+						this.targets = document.querySelectorAll(
+							this.settings.targets
+						);
+						document.body.style.height =
+							this.wrapper.clientHeight + "px";
+
+						this.windowHeight = window.clientHeight;
+						this.attachEvent();
+						this.apply(this.targets, this.wrapper);
+						this.animate();
+						this.resize();
+					},
+					apply: function(targets, wrapper) {
+						this.wrapperInit();
+
+						this.targetsLength = targets.length;
+						for (var i = 0; i < this.targetsLength; i++) {
+							var attr = {
+								offset: targets[i].getAttribute("data-offset"),
+								speedX: targets[i].getAttribute("data-speed-x"),
+								speedY: targets[i].getAttribute("data-speed-Y"),
+								percentage: targets[i].getAttribute(
+									"data-percentage"
+								),
+								horizontal: targets[i].getAttribute(
+									"data-horizontal"
+								)
+							};
+							this.targetsInit(targets[i], attr);
+						}
+					},
+					wrapperInit: function() {
+						this.wrapper.style.width = "100%";
+						this.wrapper.style.position = "fixed";
+					},
+					targetsInit: function(elm, attr) {
+						this.Targets.push({
+							elm: elm,
+							offset: attr.offset ? attr.offset : 0,
+							horizontal: attr.horizontal ? attr.horizontal : 0,
+							top: 0,
+							left: 0,
+							speedX: attr.speedX ? attr.speedX : 1,
+							speedY: attr.speedY ? attr.speedY : 1,
+							percentage: attr.percentage ? attr.percentage : 0
+						});
+					},
+					scroll: function() {
+						var scrollTopTmp =
+							document.documentElement.scrollTop ||
+							document.body.scrollTop;
+						this.scrollTop =
+							document.documentElement.scrollTop ||
+							document.body.scrollTop;
+						var offsetBottom = this.scrollTop + this.windowHeight;
+						this.wrapperUpdate(this.scrollTop);
+						for (var i = 0; i < this.Targets.length; i++) {
+							this.targetsUpdate(this.Targets[i]);
+						}
+					},
+					animate: function() {
+						this.scroll();
+						this.scrollId = requestAnimationFrame(
+							this.animate.bind(this)
+						);
+					},
+					wrapperUpdate: function() {
+						this.wapperOffset +=
+							(this.scrollTop - this.wapperOffset) *
+							this.settings.wrapperSpeed;
+						this.wrapper.style.transform =
+							"translate3d(" +
+							0 +
+							"," +
+							Math.round(-this.wapperOffset * 100) / 100 +
+							"px ," +
+							0 +
+							")";
+					},
+					targetsUpdate: function(target) {
+						target.top +=
+							(this.scrollTop *
+								Number(this.settings.targetSpeed) *
+								Number(target.speedY) -
+								target.top) *
+							this.settings.targetPercentage;
+						target.left +=
+							(this.scrollTop *
+								Number(this.settings.targetSpeed) *
+								Number(target.speedX) -
+								target.left) *
+							this.settings.targetPercentage;
+						var targetOffsetTop =
+							parseInt(target.percentage) -
+							target.top -
+							parseInt(target.offset);
+						var offsetY = Math.round(targetOffsetTop * -100) / 100;
+						var offsetX = 0;
+						if (target.horizontal) {
+							var targetOffsetLeft =
+								parseInt(target.percentage) -
+								target.left -
+								parseInt(target.offset);
+							offsetX = Math.round(targetOffsetLeft * -100) / 100;
+						}
+						target.elm.style.transform =
+							"translate3d(" +
+							offsetX +
+							"px ," +
+							offsetY +
+							"px ," +
+							0 +
+							")";
+					},
+					resize: function() {
+						var self = this;
+						self.windowHeight =
+							window.innerHeight ||
+							document.documentElement.clientHeight ||
+							0;
+						if (
+							parseInt(self.wrapper.clientHeight) !=
+							parseInt(document.body.style.height)
+						) {
+							document.body.style.height =
+								self.wrapper.clientHeight + "px";
+						}
+						self.resizeId = requestAnimationFrame(
+							self.resize.bind(self)
+						);
+					},
+					attachEvent: function() {
+						var self = this;
+						window.addEventListener("resize", function() {
+							if (!self.isResize) {
+								cancelAnimationFrame(self.resizeId);
+								cancelAnimationFrame(self.scrollId);
+								self.isResize = true;
+								setTimeout(function() {
+									self.isResize = false;
+									self.resizeId = requestAnimationFrame(
+										self.resize.bind(self)
+									);
+									self.scrollId = requestAnimationFrame(
+										self.animate.bind(self)
+									);
+								}, 200);
+							}
+						});
+					}
+				};
+
+				var luxy = new Luxy();
+
+				// return luxy;
+				luxy.init();
+			});
+		}, 1000);
+		/**
+		 * Show back arrow for home menu on click and scroll
+		 */
+
+		if (matchMedia("only screen and (max-width: 600px)").matches) {
+			if ($(".home").length > 0) {
+				$("a").click(e => {
+					$(".reveal").addClass("animate");
+				});
+				$(".reveal").click(e => {
+					$(".reveal").removeClass("animate");
+					$(".navs_wrapper").removeClass("menu-left");
+					$(".see").removeClass("see");
+				});
+				$(".menu-item-has-children").click(e => {
+					$(".navs_wrapper").addClass("menu-left");
+					$(e.currentTarget.children[1]).addClass("see");
+				});
+			}
+		}
+		if (matchMedia("only screen and (max-width: 1280px)").matches) {
+			if ($(".wellness").length > 0) {
+				console.log("wellness page");
+				$(".reveal, #hamburger-icon ").click(e => {
+					$(".reveal").removeClass("animate");
+					$(".navs_wrapper").removeClass("menu-left");
+					$(".see").removeClass("see");
+					setInterval(e => {
+						// $(".see").css("opacity", "0");
+						// $(".see").css("display", "none");
+					}, 1000);
+				});
+				$(".menu-item-has-children > a").click(e => {
+					e.preventDefault();
+					$(".reveal").addClass("animate");
+					$(".navs_wrapper").addClass("menu-left");
+					// $(e.currentTarget.parent.children[1]).addClass("see");
+					// jQuery(".menu-item-has-children > a").parent().find('ul')
+					console.log(
+						'$(e.currentTarget).parent().find("ul")',
+						$(e.currentTarget)
+							.parent()
+							.find("ul")
+					);
+					$(e.currentTarget)
+						.parent()
+						.find("ul")
+						.addClass("see");
+					$(e.currentTarget)
+						.parent()
+						.find("ul")
+						// .css("display", "block")
+						.css("opacity", "1");
+				});
+			}
+		}
+		if ($(".community").length > 0) {
+			$(".mail").click(e => {
+				$(".contact input[type=email]").focus();
+			});
+		}
+
+		/**
+		 * Image move
+		 */
+
+		// if (matchMedia("only screen and (min-width: 600px)").matches) {
+		// 		jQuery(".nk-awb")[1].remove();
+		// 	} else {
+		// 	jQuery(".nk-awb")[0].remove();
+		// }
+
+		if (matchMedia("only screen and (min-width: 600px)").matches) {
+			if (jQuery(".nk-awb").length > 0) {
+				jQuery(".nk-awb")[0].remove();
+			}
+
+			var lFollowX = 0,
+				lFollowY = 0,
+				x = 0,
+				y = 0,
+				// friction = 1 / 30;
+				friction = 1 / 30;
+
+			function moveBackground() {
+				x += (lFollowX - x) * friction;
+				y += (lFollowY - y) * friction;
+
+				let translate =
+					"translate(" + x + "px, " + y + "px) scale(1.1)";
+
+				$(".bg").css({
+					"-webit-transform": translate,
+					"-moz-transform": translate,
+					transform: translate
+				});
+
+				window.requestAnimationFrame(moveBackground);
+			}
+
+			$(window).on("mousemove click", function(e) {
+				var lMouseX = Math.max(
+					-100,
+					Math.min(100, $(window).width() / 2 - e.clientX)
+				);
+				var lMouseY = Math.max(
+					-100,
+					Math.min(100, $(window).height() / 2 - e.clientY)
+				);
+				lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+				lFollowY = (10 * lMouseY) / 100;
+			});
+
+			moveBackground();
+		} else {
+			if (jQuery(".bg").length > 0) {
+				jQuery(".bg")[0].remove();
+			}
+		}
+
+		/**
+		 * Animated segments
+		 */
 
 		let segments = document.querySelectorAll(".segment");
 		let segmentHeight = 15;
@@ -58,25 +438,13 @@ const { SmoothScrolling } = require("./SmoothScrolling");
 			return false;
 		};
 
-		let animateLines = () => {
+		const animateLines = () => {
 			// is element in view?
 			segments.forEach(element => {
 				if (inView(element)) {
 					// element is in view, add class to element
 					element.classList.add("animate");
 				}
-			});
-		};
-
-		let scrollDis = e => {
-			const targets = document.querySelectorAll(".scroll");
-			var scrolled = window.pageYOffset;
-
-			targets.forEach(target => {
-				let pos = window.pageYOffset * target.dataset.rate;
-				// console.log("target", target);
-				// console.log("target.dataset.rate", target.dataset.rate);
-				target.style.transform = "translate3d(0px," + pos + "px,0px)";
 			});
 		};
 
@@ -91,13 +459,14 @@ const { SmoothScrolling } = require("./SmoothScrolling");
 		// });
 
 		// messenger
-		$("a.messenger").click(e => {
-			e.preventDefault();
-			jQuery(".fb_customer_chat_bounce_out_v2")
-				.removeClass("fb_customer_chat_bounce_out_v2")
-				.addClass("fb_customer_chat_bounce_in_v2")
-				.css("max-height", "100%");
-		});
+		// $("a.messenger").click(e => {
+		// 	e.preventDefault();
+		// 	jQuery(".fb_customer_chat_bounce_out_v2")
+		// 		.toggleClass("fb_customer_chat_bounce_out_v2")
+		// 		.toggleClass("fb_customer_chat_bounce_in_v2")
+		// 		.css("max-height", "100%");
+		// 	// jQuery(".promptButton").click();
+		// });
 
 		// $("#buy-tickets div.button").on("click", function(e, el) {
 		// 	var $button = $(this);
@@ -218,6 +587,7 @@ const { SmoothScrolling } = require("./SmoothScrolling");
 			e.preventDefault();
 			//hmmm surely can do better
 			$(".navs_wrapper nav").toggleClass("tablet_menu_active");
+			$(".navs_wrapper").toggleClass("tablet_menu_active");
 			hamburger.toggleClass("active");
 		});
 
@@ -360,6 +730,20 @@ const { SmoothScrolling } = require("./SmoothScrolling");
 		// 	});
 		// });
 
+		if (matchMedia("only screen and (max-width: 980px)").matches) {
+			$("body, a").click(e => {
+				$(".active-csp").removeClass("active-csp");
+			});
+
+			$(".to-come").click(e => {
+				// console.log(e);
+				let el = e.target.nextElementSibling;
+				// console.log(el);
+				// console.log($(el));
+				$(el).addClass("active-csp");
+			});
+		}
+
 		var $root = $("html, body");
 		$("a").on("click", function(event) {
 			var hash = this.hash;
@@ -369,26 +753,122 @@ const { SmoothScrolling } = require("./SmoothScrolling");
 				this.href.slice(0, -hash.length - 1) ==
 					location.href.slice(0, -location.hash.length - 1)
 			) {
-				var scrollTo = $(hash).offset().top;
-				var bodyHeight = $("body").height();
-				var windowHeight = $(window).height();
-				if (bodyHeight - windowHeight < scrollTo) {
-					scrollTo = bodyHeight - windowHeight;
-				}
+				if ($(hash).length > 0) {
+					// console.log("hash", hash);
+					// console.log("$(hash)", $(hash));
+					// console.log("$(hash).offset()", $(hash).offset());
+					// console.log("$(hash).offset().top", $(hash).offset().top);
+					// console.log('$("body").height()', $("body").height());
+					// console.log("$(window).height()", $(window).height());
+					var scrollTo = $(hash).offset().top;
+					var bodyHeight = $("body").height();
+					var windowHeight = $(window).height();
+					// if (bodyHeight - windowHeight < scrollTo) {
+					// 	scrollTo = bodyHeight - windowHeight;
+					// }
 
-				$root.animate(
-					{
-						scrollTop: scrollTo
-					},
-					"normal",
-					function() {
-						location.hash = hash;
-						// console.log("done");
-						setTimeout(() => {}, 1000);
+					$root.animate(
+						{
+							scrollTop: scrollTo
+						},
+						"normal",
+						function() {
+							location.hash = hash;
+							// console.log("done");
+							// setTimeout(() => {}, 1000);
+						}
+					);
+					return false;
+				}
+			} else {
+				// console.log("event", event);
+				console.log("event.target.attributes", event.target.attributes);
+				// console.log(
+				// 	"event.target.attributes.href",
+				// 	event.target.attributes.href
+				// );
+				if (
+					event.target.attributes.length > 0 &&
+					event.target.attributes.href &&
+					event.target.attributes.href.value != "#"
+				) {
+					event.preventDefault();
+					// console.log("animating in");
+					if (
+						event.target.attributes.target &&
+						event.target.attributes.target.value == "_blank"
+					) {
+						console.log(
+							"event.target.attributes.href.nodeValue",
+							event.target.attributes.href.nodeValue
+						);
+						var win = window.open(
+							// `https://${event.target.attributes.href.nodeValue}`,
+							event.target.attributes.href.nodeValue,
+							"_blank"
+						);
+						win.focus();
+					} else {
+						if ($(".loader-rectangle-2").length > 0) {
+							$(".loader-rectangle-2").removeClass(
+								"animate-away"
+							);
+							$(".loader-rectangle-2").addClass("animate-in");
+						} else if ($(".loader-rectangle-3").length > 0) {
+							$(".loader-rectangle-3").removeClass(
+								"animate-away"
+							);
+							$(".loader-rectangle-3").addClass("animate-in");
+							$(".loader-rectangle-4").addClass("animate-in");
+						}
+						setTimeout(() => {
+							window.location = this.href;
+						}, 2000);
 					}
-				);
-				return false;
+				}
 			}
 		});
 	});
+	/* Loader */
+	$(window).on("load", e => {
+		// scrollDis(e);
+		console.log("Window loaded ");
+
+		if ($(".loader-rectangle-2").length > 0) {
+			$(".loader-rectangle-2").addClass("animate-away");
+		}
+		if ($(".loader-rectangle-3").length > 0) {
+			$(".loader-rectangle-3").addClass("animate-away");
+			$(".reveal-min-divi").addClass("animate");
+		}
+		if ($(".wellness").length > 0) {
+			setTimeout(() => {
+				$(".loader-rectangle").toggleClass("animate");
+
+				//fadeout text whils square animation is playing
+				setTimeout(() => {
+					$(".loader").fadeOut("slow");
+				}, 250);
+
+				//show messenger chat 4secs after load animation has finished
+				setTimeout(() => {
+					let { FacebookMessenger } = require("./FacebookMessenger");
+					setTimeout(() => {
+						console.log("FacebookMessenger", FacebookMessenger);
+					}, 2000);
+				}, 4000);
+			}, 4000);
+		}
+		if ($(".contaaaaccct").length > 0) {
+			console.log("contact page");
+			setTimeout(() => {
+				console.log("loading fb messnger");
+				let { FacebookMessenger } = require("./FacebookMessenger");
+			}, 2000);
+		}
+
+		/////
+	});
 })(undefined, jQuery);
+
+////

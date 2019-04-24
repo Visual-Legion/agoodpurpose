@@ -10,17 +10,23 @@
   flex-direction: column;
   justify-content: center;
   border-top: 1px solid $black;
+
   a {
     color: inherit;
     letter-spacing: 3px;
   }
   .footer__wrapper {
     max-width: $wrapper-width;
+
     nav {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       align-self: center;
+
+      @include phone {
+        justify-content: flex-start;
+      }
 
       .rel-wrapper {
         position: relative;
@@ -28,16 +34,32 @@
         justify-content: center;
         // justify-content: flex-start;
         align-items: center;
+        // overflow: hidden;
       }
 
-      .commings-soon-popup {
-        @include transition();
+      .coming-soon-popup {
+        // @include transition();
+        // transition: opacity 0.4s ease-in-out, transform 0s;
         opacity: 0;
         position: absolute;
-        width: 300px;
+        // width: 00px;
         background: #fff;
         padding: 10px;
+        width: 300px;
         cursor: default;
+
+        transform: translateY(-100%);
+        // height: 0;
+        // z-index: 100;
+
+        @include divi {
+          position: fixed;
+          bottom: 2%;
+          left: 4%;
+          width: 92%;
+          z-index: 100;
+        }
+
         .content {
           font-size: 15px;
         }
@@ -46,15 +68,38 @@
       a {
         position: relative;
         z-index: 1;
+        padding: 0 5px;
         @include transition();
         &:not(.online) {
           opacity: 0.1;
-          // pointer-events: none;
+
           cursor: default;
-          &:hover {
-            opacity: 0;
-            + .commings-soon-popup {
+          @include min-divi {
+            // &:hover,
+            // &:target {
+            &:hover {
+              opacity: 0;
+              + .coming-soon-popup {
+                // width: 300px;
+                // height: auto;
+                opacity: 1;
+                transform: translateY(00%);
+                // transition: opacity 0.4s ease-in-out,
+                //   transform 0.4s ease-in-out 0.4s;
+                // @include divi {
+                //   width: 100%;
+                // }
+                // z-index: 20;
+              }
+            }
+          }
+          @include divi {
+            // + .coming-soon-popup:target {
+            + .coming-soon-popup.active-csp {
               opacity: 1;
+              transform: translateY(00%);
+              // transition: opacity 0.4s ease-in-out,
+              //   transform 0.4s ease-in-out 0.4s;
             }
           }
         }
@@ -68,7 +113,7 @@
         // flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
+        // justify-content: center;
       }
     }
   }

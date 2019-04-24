@@ -1,0 +1,42 @@
+.wpcf7 {
+  form {
+    max-width: 600px;
+    width: 80%;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    input,
+    textarea {
+      background: transparent;
+      border: none;
+      color: $white;
+      font-size: $h1;
+      &:not([type="submit"]) {
+        border-bottom: 1px solid $white;
+        width: 100%;
+      }
+      &::placeholder {
+        color: $white;
+      }
+      @include big-phone {
+        font-size: $h3;
+      }
+    }
+    textarea {
+      height: 300px;
+      resize: none;
+      @include big-phone {
+        height: 200px;
+      }
+    }
+    input[type="submit"] {
+      font-family: $body_font;
+      text-transform: lowercase;
+      font-size: 36px;
+      float: right;
+      @include big-phone {
+        font-size: 27px;
+      }
+    }
+  }
+}

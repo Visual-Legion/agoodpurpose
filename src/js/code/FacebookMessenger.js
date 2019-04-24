@@ -18,7 +18,6 @@ var FacebookMessenger = {};
 					  page_id='571666800020233'
 					  theme_color='#dde8e2'
 				  >
-					>
 				  </div>`);
 	});
 })(undefined, jQuery);

@@ -91,39 +91,75 @@
   // position: fixed;
   z-index: 25;
   top: 0;
-  @include macbook {
-    background: $brown;
+  &:not(.home_navs) {
+    @include macbook {
+      background: $brown;
+    }
   }
   .menu {
     display: inline-block;
   }
+
+  // &:hover {
+  //   .lead-menu-item {
+  //     a {
+  //       transform: scale(1);
+  //       // color: green !important;
+  //     }
+  //   }
+  // }
+
   ul {
-    min-width: 165px;
-    padding: 0;
     @include transition();
     display: flex;
     // padding-left: 0;
-    flex-direction: column;
+    // flex-direction: column;
     // padding: 25px;
     // padding: 10px 50px;
-    background: $white;
-    border: 2px solid $brown;
+    // background: $white;
+    // border: 2px solid $brown;
     @include macbook {
-      background: $brown;
-      justify-content: center;
-      align-items: center;
-      border: none;
+      //   background: $brown;
+      //   justify-content: center;
+      //   align-items: center;
+      //   border: none;
+      margin: 7px;
     }
 
     li {
       @include transition();
-      font-size: 0;
+      will-change: auto;
+
+      // @include transition();
+      // font-size: 0;
+      // position: relative;
+
+      ul {
+        @include transition();
+        // opacity: 0;
+        border: none;
+        padding: 15px;
+        // position: absolute;
+        filter: invert(0.1);
+        z-index: 2;
+        // transform: translateX(50%);
+        // width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      // &:hover {
+      //   ul {
+      //     opacity: 1;
+      //   }
+      // }
     }
 
     li.page_item,
     li.menu-item {
       display: inline-block;
-      line-height: 0;
+      height: 100%;
+      // line-height: 0;
       // height: 0;
       // @include min-tablet {
       //   margin-right: 40px;
@@ -133,15 +169,14 @@
         line-height: 1.5;
       }
       a {
-        letter-spacing: 3.1px;
         display: inline-block;
         @include transition();
         // font-size: $body;
         padding-bottom: 7px;
         color: #fff;
 
-        font-size: 0;
-        padding: 0;
+        // font-size: 0;
+        // padding: 0;
         @include macbook {
           font-size: $body;
           opacity: 0.3;
@@ -160,21 +195,7 @@
         opacity: 0.16;
       }
     }
-    li.menu-item.see-examples {
-      height: auto;
-      text-align: center;
-      a {
-        font-size: $body;
-        color: $black;
-        opacity: 1;
-        padding: 20px 65px;
-        // opacity: 0.16;
-        @include macbook {
-          color: $white;
-          opacity: 0.16;
-        }
-      }
-    }
+
     @include macbook {
       li.online {
         a {
@@ -189,35 +210,281 @@
 }
 
 // nav.active {
-nav:hover {
-  ul {
-    // padding: 25px 50px;
-    padding-bottom: 15px;
-    background: $brown;
-    border-color: $brown;
-    li.page_item,
-    li.menu-item {
-      line-height: 1.5;
-      // padding: 0px 25px;
-      // padding-left: 25px;
-      height: auto;
-      a {
-        font-size: $body;
-        opacity: 0.3;
-        padding: 5px 40px;
+@include min-macbook {
+  .wellness {
+    .nav {
+      padding-top: 20px;
+      // position: fixed;
+      z-index: 25;
+      top: 0;
+      @include macbook {
+        background: $brown;
+      }
+      .menu {
+        display: inline-block;
+      }
+
+      ul {
+        min-width: 165px;
+        padding: 0;
+        @include transition();
+        display: flex;
+        // padding-left: 0;
+        flex-direction: column;
+        // padding: 25px;
+        // padding: 10px 50px;
+        background: $white;
+        border: 2px solid $brown;
+        @include macbook {
+          background: $brown;
+          justify-content: center;
+          align-items: center;
+          border: none;
+        }
+
+        li {
+          @include transition();
+          font-size: 0;
+          position: relative;
+
+          ul {
+            @include transition();
+            opacity: 0;
+            border: none;
+            padding: 15px;
+            position: absolute;
+            filter: invert(0.1);
+            z-index: 2;
+            transform: translateX(50%);
+            width: 100%;
+          }
+
+          &:hover {
+            ul {
+              opacity: 1;
+            }
+          }
+        }
+
+        li.page_item,
+        li.menu-item {
+          display: inline-block;
+          line-height: 0;
+          // height: 0;
+          // @include min-tablet {
+          //   margin-right: 40px;
+          // }
+          @include macbook {
+            margin-bottom: 15px;
+            line-height: 1.5;
+          }
+          a {
+            letter-spacing: 3.1px;
+            display: inline-block;
+            @include transition();
+            // font-size: $body;
+            padding-bottom: 7px;
+            color: #fff;
+
+            font-size: 0;
+            padding: 0;
+            @include macbook {
+              font-size: $body;
+              opacity: 0.3;
+            }
+          }
+
+          &.current_page_item {
+            a {
+              border-bottom: solid 2px #9b7e2f;
+            }
+          }
+        }
+        li.no-click {
+          a {
+            pointer-events: none;
+            opacity: 0.16;
+          }
+        }
+        li.menu-item.see-examples {
+          height: auto;
+          text-align: center;
+          a {
+            font-size: $body;
+            color: $black;
+            opacity: 1;
+            padding: 20px 65px;
+            // opacity: 0.16;
+            @include macbook {
+              color: $white;
+              opacity: 0.16;
+              padding-top: 0;
+            }
+          }
+        }
+        @include macbook {
+          li.online {
+            a {
+              opacity: 0.68;
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
       }
     }
-    li.menu-item.see-examples {
-      a {
-        color: $white;
-        opacity: 0.16;
+
+    @include min-macbook {
+      nav:hover {
+        ul {
+          // padding: 25px 50px;
+          padding-bottom: 15px;
+          background: $brown;
+          border-color: $brown;
+          li.page_item,
+          li.menu-item {
+            line-height: 1.5;
+            // padding: 0px 25px;
+            // padding-left: 25px;
+            height: auto;
+            a {
+              font-size: $body;
+              opacity: 0.3;
+              padding: 5px 40px;
+              // padding: 20px 65px;
+            }
+          }
+          li.menu-item.see-examples {
+            a {
+              color: $white;
+              opacity: 0.16;
+            }
+          }
+          li.online {
+            a {
+              opacity: 0.68;
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
       }
     }
-    li.online {
-      a {
-        opacity: 0.68;
+  }
+}
+
+.home {
+  .nav {
+    ul {
+      li {
+        a {
+          // @include transition();
+          transition: transform 0.7s ease-in-out;
+          &:after {
+            // @include transition();
+            transition: width 0.4s ease-in-out;
+            position: absolute;
+            content: "";
+            background: #dde8e2;
+            width: 0%;
+            height: 25%;
+            bottom: 14px;
+            left: -9px;
+            z-index: -1;
+            opacity: 0.54;
+          }
+        }
+
+        // &.lead-menu-item {
+        //   position: relative;
+        //   > a {
+        //     @include min-macbook {
+        //       transform: scale(3);
+        //     }
+        //     &:after {
+        //       position: absolute;
+        //       content: "";
+        //       background: #dde8e2;
+        //       width: 100%;
+        //       height: 25%;
+        //       bottom: 14px;
+        //       left: -9px;
+        //       z-index: -1;
+        //       opacity: 0.54;
+        //     }
+        //   }
+        // }
+        ul {
+          opacity: 0;
+          padding-left: 0;
+          margin-left: -30px;
+          transition: opacity 0.4s ease-in-out;
+          transition-delay: 0.1s;
+
+          @include big-phone {
+            opacity: 1;
+          }
+
+          li {
+            &:hover a {
+              @include min-macbook {
+                transform: scale(1.5);
+              }
+            }
+          }
+        }
         &:hover {
-          opacity: 1;
+          ul {
+            opacity: 1;
+          }
+          > a {
+            @include min-macbook {
+              transform: scale(2);
+            }
+            &:after {
+              width: 100%;
+            }
+          }
+        }
+        .email,
+        .message,
+        .messenger {
+          a {
+            padding-left: 40px;
+            &:before {
+              content: "";
+              width: 18px;
+              height: 18px;
+              position: absolute;
+              background-image: url(img/icons/baseline-alternate_email-24px.svg);
+              background-size: contain;
+              left: 0;
+              top: 2px;
+            }
+          }
+        }
+        // .email {
+        //   a{
+        //     &:before{
+
+        //     }
+        //   }
+        // }
+        .message {
+          a {
+            &:before {
+              background-image: url(img/icons/baseline-move_to_inbox-24px.svg);
+            }
+          }
+        }
+        .messenger {
+          a {
+            &:before {
+              background-image: url(img/icons/baseline-textsms-24px.svg);
+            }
+          }
         }
       }
     }

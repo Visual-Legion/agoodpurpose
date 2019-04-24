@@ -13,6 +13,10 @@
   background-color: rgba(255, 255, 255, 0);
   z-index: 10;
   // position: fixed;
+  h1,
+  h1 span {
+    font-family: $cursive;
+  }
 
   @include ipad {
     position: relative;
@@ -53,7 +57,7 @@
     // center?
     @media screen and (min-width: 1281px) {
       // padding: 20px 0;
-      padding-top: 20px;
+      // padding-top: 20px;
       position: relative;
     }
   }
@@ -66,14 +70,23 @@
     //   position: relative;
     // }
 
-    @include min-ipad {
-      padding-top: 60px;
+    @media screen and (min-width: 769px) {
+      padding-top: 40px;
       margin-right: auto;
     }
-    @include ipad {
+    @media screen and (max-width: 768px) {
       position: absolute;
-      top: 5px;
+      top: 20px;
     }
+
+    // @include big-phone {
+    //   top: 40px;
+    // }
+
+    // @include macbook {
+    //   padding-top: 35px;
+    // }
+
     img {
       width: 128px;
     }
@@ -101,16 +114,18 @@
         position: fixed;
         z-index: 100;
         width: 100vw;
-        left: 100%;
+        transform: translateX(125%);
         top: 0%;
         // opacity: 0;
         height: 100vh;
         background-color: rgba(255, 255, 255, 0.95);
         background: $brown;
         // filter: blur(10px);
-        transition: left 0.4s ease-in-out;
+        @include transition();
+        will-change: transform;
+        // transition: left 0.4s ease-in-out;
         &.tablet_menu_active {
-          left: 0;
+          transform: translateX(-35px);
           background: $brown;
           // pointer-events: all;
         }
@@ -136,9 +151,9 @@
 // $width-line: 50px;
 // $height-line: 4px;
 
-$height-icon: 21px;
-$width-line: 42px;
-$height-line: 5px;
+$height-icon: 14px;
+$width-line: 28px;
+$height-line: 4px;
 
 $transition-time: 0.4s;
 $rotation: 45deg;
@@ -159,18 +174,24 @@ $translateX: 0;
   display: none;
   @media screen and (max-width: 1279px) {
     display: inline-block;
-    position: absolute;
+    // position: absolute;
+    position: fixed;
+
+    // right: 45px;
+    // top: 45px;
+    right: 40px;
     top: 40px;
-    right: 45px;
-    // top: 30px;
-    top: 45px;
+    @include big-phone {
+      top: 30px;
+      right: 30px;
+    }
   }
 
   // margin: ($height-icon * 2) auto $height-icon auto;
 
   .line {
     display: block;
-    background: #000;
+    background: $black;
     width: $width-line;
     height: $height-line;
     position: absolute;
@@ -206,7 +227,7 @@ $translateX: 0;
   }
   &.active {
     .line {
-      background: $black;
+      background: $white;
     }
     .line-1 {
       transform: translateY($translateY) translateX($translateX)
@@ -231,6 +252,8 @@ $translateX: 0;
 }
 
 .navs_wrapper {
+  position: relative;
+
   nav a:not(.button) {
     font-size: 16px;
   }
@@ -314,3 +337,7 @@ $translateX: 0;
   //   }
   // }
 }
+
+/**
+* Copy for the menu
+*/

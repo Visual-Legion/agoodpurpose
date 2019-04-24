@@ -23,7 +23,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			"use strict";
 
 			$(function () {
-				$("footer").after("<div id='fb-root'></div>\n\t\t\t\t\t<script>(function(d, s, id) {\n\t\t\t\t\t  var js, fjs = d.getElementsByTagName(s)[0];\n\t\t\t\t\t  js = d.createElement(s); js.id = id;\n\t\t\t\t\t  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';\n\t\t\t\t\t  fjs.parentNode.insertBefore(js, fjs);\n\t\t\t\t\t}(document, 'script', 'facebook-jssdk'));</script>\n\t\t\t\t\t<div class='fb-customerchat'\n\t\t\t\t\t  attribution=\"wordpress\"\n\t\t\t\t\t  page_id='571666800020233'\n\t\t\t\t\t  theme_color='#dde8e2'\n\t\t\t\t  >\n\t\t\t\t\t>\n\t\t\t\t  </div>");
+				$("footer").after("<div id='fb-root'></div>\n\t\t\t\t\t<script>(function(d, s, id) {\n\t\t\t\t\t  var js, fjs = d.getElementsByTagName(s)[0];\n\t\t\t\t\t  js = d.createElement(s); js.id = id;\n\t\t\t\t\t  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';\n\t\t\t\t\t  fjs.parentNode.insertBefore(js, fjs);\n\t\t\t\t\t}(document, 'script', 'facebook-jssdk'));</script>\n\t\t\t\t\t<div class='fb-customerchat'\n\t\t\t\t\t  attribution=\"wordpress\"\n\t\t\t\t\t  page_id='571666800020233'\n\t\t\t\t\t  theme_color='#dde8e2'\n\t\t\t\t  >\n\t\t\t\t  </div>");
 			});
 		})(undefined, jQuery);
 
@@ -31,767 +31,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			FacebookMessenger: FacebookMessenger
 		};
 	}, {}], 2: [function (require, module, exports) {
-		/* Cookie */
-
-		var SmoothScrolling = {
-			aFunction: function aFunction(name, value) {}
-		};
-
-		(function (root, $, undefined) {
-			"use strict";
-
-			$(function () {
-				console.log("Smooth Scrolling Loaded");
-				//
-				// SmoothScroll for websites v1.4.8 (Balazs Galambosi)
-				// http://www.smoothscroll.net/
-				//
-				// Licensed under the terms of the MIT license.
-				//
-				// You may use it in your theme if you credit me.
-				// It is also free to use on any individual website.
-				//
-				// Exception:
-				// The only restriction is to not publish any
-				// extension for browsers or native application
-				// without getting a written permission first.
-				//
-
-				(function () {
-					// Scroll Variables (tweakable)
-					var defaultOptions = {
-						// Scrolling Core
-						frameRate: 150, // [Hz]
-						animationTime: 400, // [ms]
-						stepSize: 100, // [px]
-
-						// Pulse (less tweakable)
-						// ratio of "tail" to "acceleration"
-						pulseAlgorithm: true,
-						pulseScale: 4,
-						pulseNormalize: 1,
-
-						// Acceleration
-						accelerationDelta: 50, // 50
-						accelerationMax: 3, // 3
-
-						// Keyboard Settings
-						keyboardSupport: true, // option
-						arrowScroll: 50, // [px]
-
-						// Other
-						fixedBackground: true,
-						excluded: ""
-					};
-
-					var options = defaultOptions;
-
-					// Other Variables
-					var isExcluded = false;
-					var isFrame = false;
-					var direction = { x: 0, y: 0 };
-					var initDone = false;
-					var root = document.documentElement;
-					var activeElement;
-					var observer;
-					var refreshSize;
-					var deltaBuffer = [];
-					var deltaBufferTimer;
-					var isMac = /^Mac/.test(navigator.platform);
-
-					var key = {
-						left: 37,
-						up: 38,
-						right: 39,
-						down: 40,
-						spacebar: 32,
-						pageup: 33,
-						pagedown: 34,
-						end: 35,
-						home: 36
-					};
-					var arrowKeys = { 37: 1, 38: 1, 39: 1, 40: 1 };
-
-					/***********************************************
-      * INITIALIZE
-      ***********************************************/
-
-					/**
-      * Tests if smooth scrolling is allowed. Shuts down everything if not.
-      */
-					function initTest() {
-						if (options.keyboardSupport) {
-							addEvent("keydown", keydown);
-						}
-					}
-
-					/**
-      * Sets up scrolls array, determines if frames are involved.
-      */
-					function init() {
-						if (initDone || !document.body) return;
-
-						initDone = true;
-
-						var body = document.body;
-						var html = document.documentElement;
-						var windowHeight = window.innerHeight;
-						var scrollHeight = body.scrollHeight;
-
-						// check compat mode for root element
-						root = document.compatMode.indexOf("CSS") >= 0 ? html : body;
-						activeElement = body;
-
-						initTest();
-
-						// Checks if this script is running in a frame
-						if (top != self) {
-							isFrame = true;
-						} else if (
-						/**
-       * Safari 10 fixed it, Chrome fixed it in v45:
-       * This fixes a bug where the areas left and right to
-       * the content does not trigger the onmousewheel event
-       * on some pages. e.g.: html, body { height: 100% }
-       */
-						isOldSafari && scrollHeight > windowHeight && (body.offsetHeight <= windowHeight || html.offsetHeight <= windowHeight)) {
-							var fullPageElem = document.createElement("div");
-							fullPageElem.style.cssText = "position:absolute; z-index:-10000; " + "top:0; left:0; right:0; height:" + root.scrollHeight + "px";
-							document.body.appendChild(fullPageElem);
-
-							// DOM changed (throttled) to fix height
-							var pendingRefresh;
-							refreshSize = function refreshSize() {
-								if (pendingRefresh) return; // could also be: clearTimeout(pendingRefresh);
-								pendingRefresh = setTimeout(function () {
-									if (isExcluded) return; // could be running after cleanup
-									fullPageElem.style.height = "0";
-									fullPageElem.style.height = root.scrollHeight + "px";
-									pendingRefresh = null;
-								}, 500); // act rarely to stay fast
-							};
-
-							setTimeout(refreshSize, 10);
-
-							addEvent("resize", refreshSize);
-
-							// TODO: attributeFilter?
-							var config = {
-								attributes: true,
-								childList: true,
-								characterData: false
-								// subtree: true
-							};
-
-							observer = new MutationObserver(refreshSize);
-							observer.observe(body, config);
-
-							if (root.offsetHeight <= windowHeight) {
-								var clearfix = document.createElement("div");
-								clearfix.style.clear = "both";
-								body.appendChild(clearfix);
-							}
-						}
-
-						// disable fixed background
-						if (!options.fixedBackground && !isExcluded) {
-							body.style.backgroundAttachment = "scroll";
-							html.style.backgroundAttachment = "scroll";
-						}
-					}
-
-					/**
-      * Removes event listeners and other traces left on the page.
-      */
-					function cleanup() {
-						observer && observer.disconnect();
-						removeEvent(wheelEvent, wheel);
-						removeEvent("mousedown", mousedown);
-						removeEvent("keydown", keydown);
-						removeEvent("resize", refreshSize);
-						removeEvent("load", init);
-					}
-
-					/************************************************
-      * SCROLLING
-      ************************************************/
-
-					var que = [];
-					var pending = false;
-					var lastScroll = Date.now();
-
-					/**
-      * Pushes scroll actions to the scrolling queue.
-      */
-					function scrollArray(elem, left, top) {
-						directionCheck(left, top);
-
-						if (options.accelerationMax != 1) {
-							var now = Date.now();
-							var elapsed = now - lastScroll;
-							if (elapsed < options.accelerationDelta) {
-								var factor = (1 + 50 / elapsed) / 2;
-								if (factor > 1) {
-									factor = Math.min(factor, options.accelerationMax);
-									left *= factor;
-									top *= factor;
-								}
-							}
-							lastScroll = Date.now();
-						}
-
-						// push a scroll command
-						que.push({
-							x: left,
-							y: top,
-							lastX: left < 0 ? 0.99 : -0.99,
-							lastY: top < 0 ? 0.99 : -0.99,
-							start: Date.now()
-						});
-
-						// don't act if there's a pending queue
-						if (pending) {
-							return;
-						}
-
-						var scrollRoot = getScrollRoot();
-						var isWindowScroll = elem === scrollRoot || elem === document.body;
-
-						// if we haven't already fixed the behavior,
-						// and it needs fixing for this sesh
-						if (elem.$scrollBehavior == null && isScrollBehaviorSmooth(elem)) {
-							elem.$scrollBehavior = elem.style.scrollBehavior;
-							elem.style.scrollBehavior = "auto";
-						}
-
-						var step = function step(time) {
-							var now = Date.now();
-							var scrollX = 0;
-							var scrollY = 0;
-
-							for (var i = 0; i < que.length; i++) {
-								var item = que[i];
-								var elapsed = now - item.start;
-								var finished = elapsed >= options.animationTime;
-
-								// scroll position: [0, 1]
-								var position = finished ? 1 : elapsed / options.animationTime;
-
-								// easing [optional]
-								if (options.pulseAlgorithm) {
-									position = pulse(position);
-								}
-
-								// only need the difference
-								var x = item.x * position - item.lastX >> 0;
-								var y = item.y * position - item.lastY >> 0;
-
-								// add this to the total scrolling
-								scrollX += x;
-								scrollY += y;
-
-								// update last values
-								item.lastX += x;
-								item.lastY += y;
-
-								// delete and step back if it's over
-								if (finished) {
-									que.splice(i, 1);
-									i--;
-								}
-							}
-
-							// scroll left and top
-							if (isWindowScroll) {
-								window.scrollBy(scrollX, scrollY);
-							} else {
-								if (scrollX) elem.scrollLeft += scrollX;
-								if (scrollY) elem.scrollTop += scrollY;
-							}
-
-							// clean up if there's nothing left to do
-							if (!left && !top) {
-								que = [];
-							}
-
-							if (que.length) {
-								requestFrame(step, elem, 1000 / options.frameRate + 1);
-							} else {
-								pending = false;
-								// restore default behavior at the end of scrolling sesh
-								if (elem.$scrollBehavior != null) {
-									elem.style.scrollBehavior = elem.$scrollBehavior;
-									elem.$scrollBehavior = null;
-								}
-							}
-						};
-
-						// start a new queue of actions
-						requestFrame(step, elem, 0);
-						pending = true;
-					}
-
-					/***********************************************
-      * EVENTS
-      ***********************************************/
-
-					/**
-      * Mouse wheel handler.
-      * @param {Object} event
-      */
-					function wheel(event) {
-						if (!initDone) {
-							init();
-						}
-
-						var target = event.target;
-
-						// leave early if default action is prevented
-						// or it's a zooming event with CTRL
-						if (event.defaultPrevented || event.ctrlKey) {
-							return true;
-						}
-
-						// leave embedded content alone (flash & pdf)
-						if (isNodeName(activeElement, "embed") || isNodeName(target, "embed") && /\.pdf/i.test(target.src) || isNodeName(activeElement, "object") || target.shadowRoot) {
-							return true;
-						}
-
-						var deltaX = -event.wheelDeltaX || event.deltaX || 0;
-						var deltaY = -event.wheelDeltaY || event.deltaY || 0;
-
-						if (isMac) {
-							if (event.wheelDeltaX && isDivisible(event.wheelDeltaX, 120)) {
-								deltaX = -120 * (event.wheelDeltaX / Math.abs(event.wheelDeltaX));
-							}
-							if (event.wheelDeltaY && isDivisible(event.wheelDeltaY, 120)) {
-								deltaY = -120 * (event.wheelDeltaY / Math.abs(event.wheelDeltaY));
-							}
-						}
-
-						// use wheelDelta if deltaX/Y is not available
-						if (!deltaX && !deltaY) {
-							deltaY = -event.wheelDelta || 0;
-						}
-
-						// line based scrolling (Firefox mostly)
-						if (event.deltaMode === 1) {
-							deltaX *= 40;
-							deltaY *= 40;
-						}
-
-						var overflowing = overflowingAncestor(target);
-
-						// nothing to do if there's no element that's scrollable
-						if (!overflowing) {
-							// except Chrome iframes seem to eat wheel events, which we need to
-							// propagate up, if the iframe has nothing overflowing to scroll
-							if (isFrame && isChrome) {
-								// change target to iframe element itself for the parent frame
-								Object.defineProperty(event, "target", {
-									value: window.frameElement
-								});
-								return parent.wheel(event);
-							}
-							return true;
-						}
-
-						// check if it's a touchpad scroll that should be ignored
-						if (isTouchpad(deltaY)) {
-							return true;
-						}
-
-						// scale by step size
-						// delta is 120 most of the time
-						// synaptics seems to send 1 sometimes
-						if (Math.abs(deltaX) > 1.2) {
-							deltaX *= options.stepSize / 120;
-						}
-						if (Math.abs(deltaY) > 1.2) {
-							deltaY *= options.stepSize / 120;
-						}
-
-						scrollArray(overflowing, deltaX, deltaY);
-						event.preventDefault();
-						scheduleClearCache();
-					}
-
-					/**
-      * Keydown event handler.
-      * @param {Object} event
-      */
-					function keydown(event) {
-						var target = event.target;
-						var modifier = event.ctrlKey || event.altKey || event.metaKey || event.shiftKey && event.keyCode !== key.spacebar;
-
-						// our own tracked active element could've been removed from the DOM
-						if (!document.body.contains(activeElement)) {
-							activeElement = document.activeElement;
-						}
-
-						// do nothing if user is editing text
-						// or using a modifier key (except shift)
-						// or in a dropdown
-						// or inside interactive elements
-						var inputNodeNames = /^(textarea|select|embed|object)$/i;
-						var buttonTypes = /^(button|submit|radio|checkbox|file|color|image)$/i;
-						if (event.defaultPrevented || inputNodeNames.test(target.nodeName) || isNodeName(target, "input") && !buttonTypes.test(target.type) || isNodeName(activeElement, "video") || isInsideYoutubeVideo(event) || target.isContentEditable || modifier) {
-							return true;
-						}
-
-						// [spacebar] should trigger button press, leave it alone
-						if ((isNodeName(target, "button") || isNodeName(target, "input") && buttonTypes.test(target.type)) && event.keyCode === key.spacebar) {
-							return true;
-						}
-
-						// [arrwow keys] on radio buttons should be left alone
-						if (isNodeName(target, "input") && target.type == "radio" && arrowKeys[event.keyCode]) {
-							return true;
-						}
-
-						var shift,
-						    x = 0,
-						    y = 0;
-						var overflowing = overflowingAncestor(activeElement);
-
-						if (!overflowing) {
-							// Chrome iframes seem to eat key events, which we need to
-							// propagate up, if the iframe has nothing overflowing to scroll
-							return isFrame && isChrome ? parent.keydown(event) : true;
-						}
-
-						var clientHeight = overflowing.clientHeight;
-
-						if (overflowing == document.body) {
-							clientHeight = window.innerHeight;
-						}
-
-						switch (event.keyCode) {
-							case key.up:
-								y = -options.arrowScroll;
-								break;
-							case key.down:
-								y = options.arrowScroll;
-								break;
-							case key.spacebar:
-								// (+ shift)
-								shift = event.shiftKey ? 1 : -1;
-								y = -shift * clientHeight * 0.9;
-								break;
-							case key.pageup:
-								y = -clientHeight * 0.9;
-								break;
-							case key.pagedown:
-								y = clientHeight * 0.9;
-								break;
-							case key.home:
-								if (overflowing == document.body && document.scrollingElement) overflowing = document.scrollingElement;
-								y = -overflowing.scrollTop;
-								break;
-							case key.end:
-								var scroll = overflowing.scrollHeight - overflowing.scrollTop;
-								var scrollRemaining = scroll - clientHeight;
-								y = scrollRemaining > 0 ? scrollRemaining + 10 : 0;
-								break;
-							case key.left:
-								x = -options.arrowScroll;
-								break;
-							case key.right:
-								x = options.arrowScroll;
-								break;
-							default:
-								return true; // a key we don't care about
-						}
-
-						scrollArray(overflowing, x, y);
-						event.preventDefault();
-						scheduleClearCache();
-					}
-
-					/**
-      * Mousedown event only for updating activeElement
-      */
-					function mousedown(event) {
-						activeElement = event.target;
-					}
-
-					/***********************************************
-      * OVERFLOW
-      ***********************************************/
-
-					var uniqueID = function () {
-						var i = 0;
-						return function (el) {
-							return el.uniqueID || (el.uniqueID = i++);
-						};
-					}();
-
-					var cacheX = {}; // cleared out after a scrolling session
-					var cacheY = {}; // cleared out after a scrolling session
-					var clearCacheTimer;
-					var smoothBehaviorForElement = {};
-
-					//setInterval(function () { cache = {}; }, 10 * 1000);
-
-					function scheduleClearCache() {
-						clearTimeout(clearCacheTimer);
-						clearCacheTimer = setInterval(function () {
-							cacheX = cacheY = smoothBehaviorForElement = {};
-						}, 1 * 1000);
-					}
-
-					function setCache(elems, overflowing, x) {
-						var cache = x ? cacheX : cacheY;
-						for (var i = elems.length; i--;) {
-							cache[uniqueID(elems[i])] = overflowing;
-						}return overflowing;
-					}
-
-					function getCache(el, x) {
-						return (x ? cacheX : cacheY)[uniqueID(el)];
-					}
-
-					//  (body)                (root)
-					//         | hidden | visible | scroll |  auto  |
-					// hidden  |   no   |    no   |   YES  |   YES  |
-					// visible |   no   |   YES   |   YES  |   YES  |
-					// scroll  |   no   |   YES   |   YES  |   YES  |
-					// auto    |   no   |   YES   |   YES  |   YES  |
-
-					function overflowingAncestor(el) {
-						var elems = [];
-						var body = document.body;
-						var rootScrollHeight = root.scrollHeight;
-						do {
-							var cached = getCache(el, false);
-							if (cached) {
-								return setCache(elems, cached);
-							}
-							elems.push(el);
-							if (rootScrollHeight === el.scrollHeight) {
-								var topOverflowsNotHidden = overflowNotHidden(root) && overflowNotHidden(body);
-								var isOverflowCSS = topOverflowsNotHidden || overflowAutoOrScroll(root);
-								if (isFrame && isContentOverflowing(root) || !isFrame && isOverflowCSS) {
-									return setCache(elems, getScrollRoot());
-								}
-							} else if (isContentOverflowing(el) && overflowAutoOrScroll(el)) {
-								return setCache(elems, el);
-							}
-						} while (el = el.parentElement);
-					}
-
-					function isContentOverflowing(el) {
-						return el.clientHeight + 10 < el.scrollHeight;
-					}
-
-					// typically for <body> and <html>
-					function overflowNotHidden(el) {
-						var overflow = getComputedStyle(el, "").getPropertyValue("overflow-y");
-						return overflow !== "hidden";
-					}
-
-					// for all other elements
-					function overflowAutoOrScroll(el) {
-						var overflow = getComputedStyle(el, "").getPropertyValue("overflow-y");
-						return overflow === "scroll" || overflow === "auto";
-					}
-
-					// for all other elements
-					function isScrollBehaviorSmooth(el) {
-						var id = uniqueID(el);
-						if (smoothBehaviorForElement[id] == null) {
-							var scrollBehavior = getComputedStyle(el, "")["scroll-behavior"];
-							smoothBehaviorForElement[id] = "smooth" == scrollBehavior;
-						}
-						return smoothBehaviorForElement[id];
-					}
-
-					/***********************************************
-      * HELPERS
-      ***********************************************/
-
-					function addEvent(type, fn) {
-						window.addEventListener(type, fn, false);
-					}
-
-					function removeEvent(type, fn) {
-						window.removeEventListener(type, fn, false);
-					}
-
-					function isNodeName(el, tag) {
-						return el && (el.nodeName || "").toLowerCase() === tag.toLowerCase();
-					}
-
-					function directionCheck(x, y) {
-						x = x > 0 ? 1 : -1;
-						y = y > 0 ? 1 : -1;
-						if (direction.x !== x || direction.y !== y) {
-							direction.x = x;
-							direction.y = y;
-							que = [];
-							lastScroll = 0;
-						}
-					}
-
-					if (window.localStorage && localStorage.SS_deltaBuffer) {
-						try {
-							// #46 Safari throws in private browsing for localStorage
-							deltaBuffer = localStorage.SS_deltaBuffer.split(",");
-						} catch (e) {}
-					}
-
-					function isTouchpad(deltaY) {
-						if (!deltaY) return;
-						if (!deltaBuffer.length) {
-							deltaBuffer = [deltaY, deltaY, deltaY];
-						}
-						deltaY = Math.abs(deltaY);
-						deltaBuffer.push(deltaY);
-						deltaBuffer.shift();
-						clearTimeout(deltaBufferTimer);
-						deltaBufferTimer = setTimeout(function () {
-							try {
-								// #46 Safari throws in private browsing for localStorage
-								localStorage.SS_deltaBuffer = deltaBuffer.join(",");
-							} catch (e) {}
-						}, 1000);
-						var dpiScaledWheelDelta = deltaY > 120 && allDeltasDivisableBy(deltaY); // win64
-						return !allDeltasDivisableBy(120) && !allDeltasDivisableBy(100) && !dpiScaledWheelDelta;
-					}
-
-					function isDivisible(n, divisor) {
-						return Math.floor(n / divisor) == n / divisor;
-					}
-
-					function allDeltasDivisableBy(divisor) {
-						return isDivisible(deltaBuffer[0], divisor) && isDivisible(deltaBuffer[1], divisor) && isDivisible(deltaBuffer[2], divisor);
-					}
-
-					function isInsideYoutubeVideo(event) {
-						var elem = event.target;
-						var isControl = false;
-						if (document.URL.indexOf("www.youtube.com/watch") != -1) {
-							do {
-								isControl = elem.classList && elem.classList.contains("html5-video-controls");
-								if (isControl) break;
-							} while (elem = elem.parentNode);
-						}
-						return isControl;
-					}
-
-					var requestFrame = function () {
-						return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback, element, delay) {
-							window.setTimeout(callback, delay || 1000 / 60);
-						};
-					}();
-
-					var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-
-					var getScrollRoot = function () {
-						var SCROLL_ROOT = document.scrollingElement;
-						return function () {
-							if (!SCROLL_ROOT) {
-								var dummy = document.createElement("div");
-								dummy.style.cssText = "height:10000px;width:1px;";
-								document.body.appendChild(dummy);
-								var bodyScrollTop = document.body.scrollTop;
-								var docElScrollTop = document.documentElement.scrollTop;
-								window.scrollBy(0, 3);
-								if (document.body.scrollTop != bodyScrollTop) SCROLL_ROOT = document.body;else SCROLL_ROOT = document.documentElement;
-								window.scrollBy(0, -3);
-								document.body.removeChild(dummy);
-							}
-							return SCROLL_ROOT;
-						};
-					}();
-
-					/***********************************************
-      * PULSE (by Michael Herf)
-      ***********************************************/
-
-					/**
-      * Viscous fluid with a pulse for part and decay for the rest.
-      * - Applies a fixed force over an interval (a damped acceleration), and
-      * - Lets the exponential bleed away the velocity over a longer interval
-      * - Michael Herf, http://stereopsis.com/stopping/
-      */
-					function pulse_(x) {
-						var val, start, expx;
-						// test
-						x = x * options.pulseScale;
-						if (x < 1) {
-							// acceleartion
-							val = x - (1 - Math.exp(-x));
-						} else {
-							// tail
-							// the previous animation ended here:
-							start = Math.exp(-1);
-							// simple viscous drag
-							x -= 1;
-							expx = 1 - Math.exp(-x);
-							val = start + expx * (1 - start);
-						}
-						return val * options.pulseNormalize;
-					}
-
-					function pulse(x) {
-						if (x >= 1) return 1;
-						if (x <= 0) return 0;
-
-						if (options.pulseNormalize == 1) {
-							options.pulseNormalize /= pulse_(1);
-						}
-						return pulse_(x);
-					}
-
-					/***********************************************
-      * FIRST RUN
-      ***********************************************/
-
-					var userAgent = window.navigator.userAgent;
-					var isEdge = /Edge/.test(userAgent); // thank you MS
-					var isChrome = /chrome/i.test(userAgent) && !isEdge;
-					var isSafari = /safari/i.test(userAgent) && !isEdge;
-					var isMobile = /mobile/i.test(userAgent);
-					var isIEWin7 = /Windows NT 6.1/i.test(userAgent) && /rv:11/i.test(userAgent);
-					var isOldSafari = isSafari && (/Version\/8/i.test(userAgent) || /Version\/9/i.test(userAgent));
-					var isEnabledForBrowser = (isChrome || isSafari || isIEWin7) && !isMobile;
-
-					var wheelEvent;
-					if ("onwheel" in document.createElement("div")) wheelEvent = "wheel";else if ("onmousewheel" in document.createElement("div")) wheelEvent = "mousewheel";
-
-					if (wheelEvent && isEnabledForBrowser) {
-						addEvent(wheelEvent, wheel);
-						addEvent("mousedown", mousedown);
-						addEvent("load", init);
-					}
-
-					/***********************************************
-      * PUBLIC INTERFACE
-      ***********************************************/
-
-					function SmoothScroll(optionsToSet) {
-						for (var key in optionsToSet) {
-							if (defaultOptions.hasOwnProperty(key)) options[key] = optionsToSet[key];
-						}
-					}
-					SmoothScroll.destroy = cleanup;
-
-					if (window.SmoothScrollOptions)
-						// async API
-						SmoothScroll(window.SmoothScrollOptions);
-
-					if (typeof define === "function" && define.amd) define(function () {
-						return SmoothScroll;
-					});else if ("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports))) module.exports = SmoothScroll;else window.SmoothScroll = SmoothScroll;
-				})();
-			});
-		})(undefined, jQuery);
-
-		module.exports = {
-			SmoothScrolling: SmoothScrolling
-		};
-	}, {}], 3: [function (require, module, exports) {
 		// if ($(".gmaps").length > 0) {
 		// 	const {gmaps} = require('./maps');
 		// }
@@ -799,38 +38,337 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		// const {cookie} = require('./cookie');
 		// const {contact} = require('./contact');
 
-		var _require = require("./SmoothScrolling"),
-		    SmoothScrolling = _require.SmoothScrolling;
+		// const { SmoothScrolling } = require("../lib/SmoothScrolling");
+
+		var scrollDis = function scrollDis(e) {
+			var targets = document.querySelectorAll(".scroll");
+			var scrolled = window.pageYOffset;
+
+			targets.forEach(function (target) {
+				var pos = window.pageYOffset * target.dataset.rate;
+				// console.log("target", target);
+				// console.log("target.dataset.rate", target.dataset.rate);
+				target.style.transform = "translate3d(0px," + pos + "px,0px)";
+			});
+		};
 
 		(function (root, $, undefined) {
 			"use strict";
 
+			var _this = this;
+
 			$(function () {
 				// DOM ready, take it away
-				console.log("JS/JQ Ready v.5 ");
+				console.log("DOM Ready v.3");
 
-				/* Loader */
-				$(window).on("load", function (e) {
-					scrollDis(e);
-					console.log("Window loaded ");
-					setTimeout(function () {
-						$(".loader-rectangle").toggleClass("animate");
+				/**
+     *
+     */
 
-						//fadeout text whils square animation is playing
-						setTimeout(function () {
-							$(".loader").fadeOut("slow");
-						}, 250);
+				/*!
+     * luxy.js v0.1.0: Inertia scroll and parallax effect plugin in Vanilla.js
+     * (c) 2018 Mineo Okuda
+     * MIT License
+     * git+ssh://git@github.com:min30327/luxy.js.git
+     */
 
-						//show messenger chat 4secs after load animation has finished
-						setTimeout(function () {
-							var _require2 = require("./FacebookMessenger"),
-							    FacebookMessenger = _require2.FacebookMessenger;
-						}, 4000);
-					}, 4000);
-				});
+				/**
+     * Written by Mineo Okuda on 01/03/18.
+     *
+     * Mineo Okuda - development + design
+     * https://willstyle.co.jp
+     * https://github.com/min30327
+     *
+     * MIT license.
+     */
+				setTimeout(function () {
+					(function (root, factory) {
+						"use strict";
+
+						if (typeof define === "function" && define.amd) {
+							// AMD. Register as an anonymous module.
+							define([], factory);
+						} else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object") {
+							// COMMONJS
+							module.exports = factory();
+						} else {
+							// BROWSER
+							root.luxy = factory();
+						}
+					})(_this, function () {
+						"use strict";
+
+						var defaults = {
+							wrapper: "#luxy",
+							targets: ".luxy-el",
+							wrapperSpeed: 0.08,
+							targetSpeed: 0.02,
+							targetPercentage: 0.1
+						};
+
+						var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+						window.requestAnimationFrame = requestAnimationFrame;
+						var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
+						/**
+       * Merge two or more objects. Returns a new object.
+       * @param {Object}   objects  The objects to merge together
+       * @returns {Object}          Merged values of defaults and options
+       */
+						var extend = function extend() {
+							// Variables
+							var extended = {};
+							var deep = false;
+							var i = 0;
+							var length = arguments.length;
+
+							// Merge the object into the extended object
+							var merge = function merge(obj) {
+								for (var prop in obj) {
+									if (obj.hasOwnProperty(prop)) {
+										extended[prop] = obj[prop];
+									}
+								}
+							};
+
+							// Loop through each object and conduct a merge
+							for (; i < length; i++) {
+								var obj = arguments[i];
+								merge(obj);
+							}
+
+							return extended;
+						};
+
+						var Luxy = function Luxy() {
+							this.Targets = [];
+							this.TargetsLength = 0;
+							this.wrapper = "";
+							this.windowHeight = 0;
+							this.wapperOffset = 0;
+						};
+						Luxy.prototype = {
+							isAnimate: false,
+							isResize: false,
+							scrollId: "",
+							resizeId: "",
+							init: function init(options) {
+								this.settings = extend(defaults, options || {});
+								console.log("this.settings", this.settings);
+								this.wrapper = document.querySelector(this.settings.wrapper);
+
+								if (this.wrapper === "undefined") {
+									return false;
+								}
+								this.targets = document.querySelectorAll(this.settings.targets);
+								document.body.style.height = this.wrapper.clientHeight + "px";
+
+								this.windowHeight = window.clientHeight;
+								this.attachEvent();
+								this.apply(this.targets, this.wrapper);
+								this.animate();
+								this.resize();
+							},
+							apply: function apply(targets, wrapper) {
+								this.wrapperInit();
+
+								this.targetsLength = targets.length;
+								for (var i = 0; i < this.targetsLength; i++) {
+									var attr = {
+										offset: targets[i].getAttribute("data-offset"),
+										speedX: targets[i].getAttribute("data-speed-x"),
+										speedY: targets[i].getAttribute("data-speed-Y"),
+										percentage: targets[i].getAttribute("data-percentage"),
+										horizontal: targets[i].getAttribute("data-horizontal")
+									};
+									this.targetsInit(targets[i], attr);
+								}
+							},
+							wrapperInit: function wrapperInit() {
+								this.wrapper.style.width = "100%";
+								this.wrapper.style.position = "fixed";
+							},
+							targetsInit: function targetsInit(elm, attr) {
+								this.Targets.push({
+									elm: elm,
+									offset: attr.offset ? attr.offset : 0,
+									horizontal: attr.horizontal ? attr.horizontal : 0,
+									top: 0,
+									left: 0,
+									speedX: attr.speedX ? attr.speedX : 1,
+									speedY: attr.speedY ? attr.speedY : 1,
+									percentage: attr.percentage ? attr.percentage : 0
+								});
+							},
+							scroll: function scroll() {
+								var scrollTopTmp = document.documentElement.scrollTop || document.body.scrollTop;
+								this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+								var offsetBottom = this.scrollTop + this.windowHeight;
+								this.wrapperUpdate(this.scrollTop);
+								for (var i = 0; i < this.Targets.length; i++) {
+									this.targetsUpdate(this.Targets[i]);
+								}
+							},
+							animate: function animate() {
+								this.scroll();
+								this.scrollId = requestAnimationFrame(this.animate.bind(this));
+							},
+							wrapperUpdate: function wrapperUpdate() {
+								this.wapperOffset += (this.scrollTop - this.wapperOffset) * this.settings.wrapperSpeed;
+								this.wrapper.style.transform = "translate3d(" + 0 + "," + Math.round(-this.wapperOffset * 100) / 100 + "px ," + 0 + ")";
+							},
+							targetsUpdate: function targetsUpdate(target) {
+								target.top += (this.scrollTop * Number(this.settings.targetSpeed) * Number(target.speedY) - target.top) * this.settings.targetPercentage;
+								target.left += (this.scrollTop * Number(this.settings.targetSpeed) * Number(target.speedX) - target.left) * this.settings.targetPercentage;
+								var targetOffsetTop = parseInt(target.percentage) - target.top - parseInt(target.offset);
+								var offsetY = Math.round(targetOffsetTop * -100) / 100;
+								var offsetX = 0;
+								if (target.horizontal) {
+									var targetOffsetLeft = parseInt(target.percentage) - target.left - parseInt(target.offset);
+									offsetX = Math.round(targetOffsetLeft * -100) / 100;
+								}
+								target.elm.style.transform = "translate3d(" + offsetX + "px ," + offsetY + "px ," + 0 + ")";
+							},
+							resize: function resize() {
+								var self = this;
+								self.windowHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+								if (parseInt(self.wrapper.clientHeight) != parseInt(document.body.style.height)) {
+									document.body.style.height = self.wrapper.clientHeight + "px";
+								}
+								self.resizeId = requestAnimationFrame(self.resize.bind(self));
+							},
+							attachEvent: function attachEvent() {
+								var self = this;
+								window.addEventListener("resize", function () {
+									if (!self.isResize) {
+										cancelAnimationFrame(self.resizeId);
+										cancelAnimationFrame(self.scrollId);
+										self.isResize = true;
+										setTimeout(function () {
+											self.isResize = false;
+											self.resizeId = requestAnimationFrame(self.resize.bind(self));
+											self.scrollId = requestAnimationFrame(self.animate.bind(self));
+										}, 200);
+									}
+								});
+							}
+						};
+
+						var luxy = new Luxy();
+
+						// return luxy;
+						luxy.init();
+					});
+				}, 1000);
+				/**
+     * Show back arrow for home menu on click and scroll
+     */
+
+				if (matchMedia("only screen and (max-width: 600px)").matches) {
+					if ($(".home").length > 0) {
+						$("a").click(function (e) {
+							$(".reveal").addClass("animate");
+						});
+						$(".reveal").click(function (e) {
+							$(".reveal").removeClass("animate");
+							$(".navs_wrapper").removeClass("menu-left");
+							$(".see").removeClass("see");
+						});
+						$(".menu-item-has-children").click(function (e) {
+							$(".navs_wrapper").addClass("menu-left");
+							$(e.currentTarget.children[1]).addClass("see");
+						});
+					}
+				}
+				if (matchMedia("only screen and (max-width: 1280px)").matches) {
+					if ($(".wellness").length > 0) {
+						console.log("wellness page");
+						$(".reveal, #hamburger-icon ").click(function (e) {
+							$(".reveal").removeClass("animate");
+							$(".navs_wrapper").removeClass("menu-left");
+							$(".see").removeClass("see");
+							setInterval(function (e) {
+								// $(".see").css("opacity", "0");
+								// $(".see").css("display", "none");
+							}, 1000);
+						});
+						$(".menu-item-has-children > a").click(function (e) {
+							e.preventDefault();
+							$(".reveal").addClass("animate");
+							$(".navs_wrapper").addClass("menu-left");
+							// $(e.currentTarget.parent.children[1]).addClass("see");
+							// jQuery(".menu-item-has-children > a").parent().find('ul')
+							console.log('$(e.currentTarget).parent().find("ul")', $(e.currentTarget).parent().find("ul"));
+							$(e.currentTarget).parent().find("ul").addClass("see");
+							$(e.currentTarget).parent().find("ul")
+							// .css("display", "block")
+							.css("opacity", "1");
+						});
+					}
+				}
+				if ($(".community").length > 0) {
+					$(".mail").click(function (e) {
+						$(".contact input[type=email]").focus();
+					});
+				}
+
+				/**
+     * Image move
+     */
+
+				// if (matchMedia("only screen and (min-width: 600px)").matches) {
+				// 		jQuery(".nk-awb")[1].remove();
+				// 	} else {
+				// 	jQuery(".nk-awb")[0].remove();
+				// }
+
+				if (matchMedia("only screen and (min-width: 600px)").matches) {
+					var moveBackground = function moveBackground() {
+						x += (lFollowX - x) * friction;
+						y += (lFollowY - y) * friction;
+
+						var translate = "translate(" + x + "px, " + y + "px) scale(1.1)";
+
+						$(".bg").css({
+							"-webit-transform": translate,
+							"-moz-transform": translate,
+							transform: translate
+						});
+
+						window.requestAnimationFrame(moveBackground);
+					};
+
+					if (jQuery(".nk-awb").length > 0) {
+						jQuery(".nk-awb")[0].remove();
+					}
+
+					var lFollowX = 0,
+					    lFollowY = 0,
+					    x = 0,
+					    y = 0,
+
+					// friction = 1 / 30;
+					friction = 1 / 30;
+
+					$(window).on("mousemove click", function (e) {
+						var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+						var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+						lFollowX = 20 * lMouseX / 100; // 100 : 12 = lMouxeX : lFollow
+						lFollowY = 10 * lMouseY / 100;
+					});
+
+					moveBackground();
+				} else {
+					if (jQuery(".bg").length > 0) {
+						jQuery(".bg")[0].remove();
+					}
+				}
+
+				/**
+     * Animated segments
+     */
 
 				var segments = document.querySelectorAll(".segment");
-				// let elementHeight = segments.clientHeight;
 				var segmentHeight = 15;
 
 				var inView = function inView(element) {
@@ -862,18 +400,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					});
 				};
 
-				var scrollDis = function scrollDis(e) {
-					var targets = document.querySelectorAll(".scroll");
-					var scrolled = window.pageYOffset;
-
-					targets.forEach(function (target) {
-						var pos = window.pageYOffset * target.dataset.rate;
-						// console.log("target", target);
-						// console.log("target.dataset.rate", target.dataset.rate);
-						target.style.transform = "translate3d(0px," + pos + "px,0px)";
-					});
-				};
-
 				window.addEventListener("scroll", function (e) {
 					scrollDis(e);
 					animateLines();
@@ -885,10 +411,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				// });
 
 				// messenger
-				$("a.messenger").click(function (e) {
-					e.preventDefault();
-					jQuery(".fb_customer_chat_bounce_out_v2").removeClass("fb_customer_chat_bounce_out_v2").addClass("fb_customer_chat_bounce_in_v2").css("max-height", "100%");
-				});
+				// $("a.messenger").click(e => {
+				// 	e.preventDefault();
+				// 	jQuery(".fb_customer_chat_bounce_out_v2")
+				// 		.toggleClass("fb_customer_chat_bounce_out_v2")
+				// 		.toggleClass("fb_customer_chat_bounce_in_v2")
+				// 		.css("max-height", "100%");
+				// 	// jQuery(".promptButton").click();
+				// });
 
 				// $("#buy-tickets div.button").on("click", function(e, el) {
 				// 	var $button = $(this);
@@ -1009,6 +539,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					e.preventDefault();
 					//hmmm surely can do better
 					$(".navs_wrapper nav").toggleClass("tablet_menu_active");
+					$(".navs_wrapper").toggleClass("tablet_menu_active");
 					hamburger.toggleClass("active");
 				});
 
@@ -1151,28 +682,128 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				// 	});
 				// });
 
+				if (matchMedia("only screen and (max-width: 980px)").matches) {
+					$("body, a").click(function (e) {
+						$(".active-csp").removeClass("active-csp");
+					});
+
+					$(".to-come").click(function (e) {
+						// console.log(e);
+						var el = e.target.nextElementSibling;
+						// console.log(el);
+						// console.log($(el));
+						$(el).addClass("active-csp");
+					});
+				}
+
 				var $root = $("html, body");
 				$("a").on("click", function (event) {
+					var _this2 = this;
+
 					var hash = this.hash;
 					// Is the anchor on the same page?
 					if (hash && this.href.slice(0, -hash.length - 1) == location.href.slice(0, -location.hash.length - 1)) {
-						var scrollTo = $(hash).offset().top;
-						var bodyHeight = $("body").height();
-						var windowHeight = $(window).height();
-						if (bodyHeight - windowHeight < scrollTo) {
-							scrollTo = bodyHeight - windowHeight;
-						}
+						if ($(hash).length > 0) {
+							// console.log("hash", hash);
+							// console.log("$(hash)", $(hash));
+							// console.log("$(hash).offset()", $(hash).offset());
+							// console.log("$(hash).offset().top", $(hash).offset().top);
+							// console.log('$("body").height()', $("body").height());
+							// console.log("$(window).height()", $(window).height());
+							var scrollTo = $(hash).offset().top;
+							var bodyHeight = $("body").height();
+							var windowHeight = $(window).height();
+							// if (bodyHeight - windowHeight < scrollTo) {
+							// 	scrollTo = bodyHeight - windowHeight;
+							// }
 
-						$root.animate({
-							scrollTop: scrollTo
-						}, "normal", function () {
-							location.hash = hash;
-							// console.log("done");
-							setTimeout(function () {}, 1000);
-						});
-						return false;
+							$root.animate({
+								scrollTop: scrollTo
+							}, "normal", function () {
+								location.hash = hash;
+								// console.log("done");
+								// setTimeout(() => {}, 1000);
+							});
+							return false;
+						}
+					} else {
+						// console.log("event", event);
+						console.log("event.target.attributes", event.target.attributes);
+						// console.log(
+						// 	"event.target.attributes.href",
+						// 	event.target.attributes.href
+						// );
+						if (event.target.attributes.length > 0 && event.target.attributes.href && event.target.attributes.href.value != "#") {
+							event.preventDefault();
+							// console.log("animating in");
+							if (event.target.attributes.target && event.target.attributes.target.value == "_blank") {
+								console.log("event.target.attributes.href.nodeValue", event.target.attributes.href.nodeValue);
+								var win = window.open(
+								// `https://${event.target.attributes.href.nodeValue}`,
+								event.target.attributes.href.nodeValue, "_blank");
+								win.focus();
+							} else {
+								if ($(".loader-rectangle-2").length > 0) {
+									$(".loader-rectangle-2").removeClass("animate-away");
+									$(".loader-rectangle-2").addClass("animate-in");
+								} else if ($(".loader-rectangle-3").length > 0) {
+									$(".loader-rectangle-3").removeClass("animate-away");
+									$(".loader-rectangle-3").addClass("animate-in");
+									$(".loader-rectangle-4").addClass("animate-in");
+								}
+								setTimeout(function () {
+									window.location = _this2.href;
+								}, 2000);
+							}
+						}
 					}
 				});
 			});
+			/* Loader */
+			$(window).on("load", function (e) {
+				// scrollDis(e);
+				console.log("Window loaded ");
+
+				if ($(".loader-rectangle-2").length > 0) {
+					$(".loader-rectangle-2").addClass("animate-away");
+				}
+				if ($(".loader-rectangle-3").length > 0) {
+					$(".loader-rectangle-3").addClass("animate-away");
+					$(".reveal-min-divi").addClass("animate");
+				}
+				if ($(".wellness").length > 0) {
+					setTimeout(function () {
+						$(".loader-rectangle").toggleClass("animate");
+
+						//fadeout text whils square animation is playing
+						setTimeout(function () {
+							$(".loader").fadeOut("slow");
+						}, 250);
+
+						//show messenger chat 4secs after load animation has finished
+						setTimeout(function () {
+							var _require = require("./FacebookMessenger"),
+							    FacebookMessenger = _require.FacebookMessenger;
+
+							setTimeout(function () {
+								console.log("FacebookMessenger", FacebookMessenger);
+							}, 2000);
+						}, 4000);
+					}, 4000);
+				}
+				if ($(".contaaaaccct").length > 0) {
+					console.log("contact page");
+					setTimeout(function () {
+						console.log("loading fb messnger");
+
+						var _require2 = require("./FacebookMessenger"),
+						    FacebookMessenger = _require2.FacebookMessenger;
+					}, 2000);
+				}
+
+				/////
+			});
 		})(undefined, jQuery);
-	}, { "./FacebookMessenger": 1, "./SmoothScrolling": 2 }] }, {}, [3]);
+
+		////
+	}, { "./FacebookMessenger": 1 }] }, {}, [2]);

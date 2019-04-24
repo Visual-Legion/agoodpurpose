@@ -119,6 +119,30 @@ function html5blank_nav()
     );
 }
 
+function html5blank_nav_extra()
+{
+    wp_nav_menu(
+    array(
+        'theme_location'  => 'header-menu',
+        'menu'            => 3,
+        'container'       => 'div',
+        'container_class' => 'menu-{menu slug}-container',
+        'container_id'    => '',
+        'menu_class'      => 'menu',
+        'menu_id'         => '',
+        'echo'            => true,
+        'fallback_cb'     => 'wp_page_menu',
+        'before'          => '',
+        'after'           => '',
+        'link_before'     => '',
+        'link_after'      => '',
+        'items_wrap'      => '<ul>%3$s</ul>',
+        'depth'           => 0,
+        'walker'          => ''
+        )
+    );
+}
+
 // Load HTML5 Blank scripts (header.php)
 function html5blank_header_scripts()
 {
@@ -160,7 +184,7 @@ function html5blank_header_scripts()
                     'slick-js'
                     // 'magnific-popup'
                 ),
-                '1.0.7');
+                '1.0.0');
 
             // Enqueue Scripts
             wp_localize_script( 'tredny_scripts', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
@@ -173,7 +197,7 @@ function html5blank_header_scripts()
             //maybe don't need this
             // wp_register_script('magnific-popup', get_template_directory_uri() . '/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js', array(), '1.0.0');
             // Scripts minify
-            wp_register_script('html5blankscripts-min', get_template_directory_uri() . '/js/scripts.min.js', array(), '1.0.3');
+            wp_register_script('html5blankscripts-min', get_template_directory_uri() . '/js/scripts.min.js', array(), '1.0.16');
 
             wp_localize_script( 'html5blankscripts-min', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
             // Enqueue Scripts
@@ -216,13 +240,13 @@ function html5blank_styles()
         wp_enqueue_style('slick-theme');
 
         // Custom CSS
-        wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array('normalize'), '1.0.7');
+        wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array('normalize'), '1.0.16');
 
         // Register CSS
         wp_enqueue_style('html5blank');
     } else {
         // Custom CSS
-        wp_register_style('html5blankcssmin', get_template_directory_uri() . '/style.css', array(), '1.0.3');
+        wp_register_style('html5blankcssmin', get_template_directory_uri() . '/style.css', array(), '1.0.16');
         // Register CSS
         wp_enqueue_style('html5blankcssmin');
     }

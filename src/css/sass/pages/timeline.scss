@@ -1,0 +1,179 @@
+.timeline {
+  // overflow-x: hidden;
+  @include divi {
+    background: $brown;
+  }
+  @include divi {
+    .header {
+      z-index: 0;
+    }
+  }
+  .back {
+    @include min-ipad {
+      bottom: -60px;
+    }
+  }
+  //   .back .back-wrapper .back-group {
+  //     @include divi {
+  //       z-index: 0;
+  //     }
+  //   }
+  @include big-phone;
+  .header {
+    position: absolute;
+
+    h1 {
+      color: $white;
+    }
+  }
+  .wrapper {
+    // background-color: $brown;
+    .events {
+      padding: 54px;
+
+      @include min-big-phone {
+        // padding-top: 216px;
+        padding-top: 108px;
+      }
+
+      @include big-phone {
+        padding: 27px;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        color: $white;
+      }
+      h1 {
+        position: relative;
+        margin-bottom: 54px;
+        position: relative;
+        @include min-divi {
+          z-index: 2;
+        }
+      }
+      .event {
+        display: flex;
+        @include divi {
+          flex-direction: column;
+        }
+        .details {
+          @include divi {
+            padding-left: 20px;
+            padding-top: 10px;
+          }
+          p {
+            line-height: 1.7;
+          }
+        }
+        .left {
+          position: relative;
+
+          @include min-divi {
+            z-index: 2;
+            width: 33%;
+            padding-right: 11%;
+          }
+
+          .date {
+            opacity: 0.54;
+            margin-bottom: 5px;
+          }
+          .title {
+            opacity: 0.84;
+            @include divi {
+              margin-bottom: 10px;
+            }
+          }
+        }
+        .right {
+          @include min-divi {
+            width: 67%;
+            padding-right: 20%;
+            p {
+              color: $black;
+            }
+          }
+        }
+        // .left,
+        // .right {
+        //   padding: 10%;
+        // }
+      }
+    }
+  }
+}
+
+.reveal-min-big-phone {
+  opacity: 0;
+  &.animate {
+    @include min-big-phone {
+      animation-duration: 1s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal;
+      animation-name: reveal;
+    }
+  }
+}
+
+.reveal-big-phone {
+  opacity: 0;
+  &.animate {
+    @include big-phone {
+      animation-duration: 1s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal;
+      animation-name: reveal;
+    }
+  }
+}
+
+.reveal {
+  opacity: 0;
+  &.animate {
+    animation-duration: 1s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-direction: normal;
+    animation-name: reveal;
+  }
+}
+
+.reveal-min-divi {
+  @include min-divi {
+    opacity: 0;
+  }
+  &.animate {
+    @include min-divi {
+      animation-duration: 1s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal;
+      animation-name: reveal;
+    }
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

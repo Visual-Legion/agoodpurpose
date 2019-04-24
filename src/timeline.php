@@ -1,4 +1,4 @@
-<?php /* Template Name: Home Page */ ?>
+<?php /* Template Name: Timeline Page */ ?>
 
 <?php //get_view_top(); 
     get_header();
@@ -8,7 +8,7 @@
 <header class="header clear" role="banner">
     <div class="header_wrapper">
         <!-- logo -->
-        <div class="logo link">
+        <div class="logo link reveal-min-divi">
             <a href="<?php echo home_url(); ?>"></a>
             <h1>agoodpurpose</h1>
             <!-- <span>agoodpurpose</span> -->
@@ -18,35 +18,42 @@
     </div>
 </header>
 
-<div class="loader-rectangle-2"></div>
+<div class="loader-rectangle-3"></div>
+<div class="loader-rectangle-4"></div>
 
 <main class=" main" role="main" aria-label="Content">
-    <!-- section -->
-    <section class="landing-page " id="moving-image">
 
-        <img class="bg" src="/wp-content/uploads/2019/03/a-good-purpose-home-background-compressed.jpg"
-            alt="home background">
-        <?php echo do_shortcode('[nk_awb awb_type="image" awb_image="60" awb_image_size="full" awb_image_background_size="cover" awb_image_background_position="50% 50%" awb_parallax="scroll" awb_parallax_speed="0.5" awb_parallax_mobile="true" awb_mouse_parallax="true" awb_mouse_parallax_size="30" awb_mouse_parallax_speed="10000"][/nk_awb]');?>
-        <div class="middle-text">
-            <h2><span>Improve Humans,</span> <span>Improve the world</span></h2>
+    <section class="timeline">
+        <div class="wrapper">
+            <div class="events">
+                <h1 class="reveal-min-divi">TIMELINE</h1>
+                <div class="event">
+                    <div class="left reveal-min-divi">
+                        <div class="date">
+                            <h3>March 2019</h3>
+                        </div>
+                        <div class="title">
+                            <p>Product announcement for the wellness market.</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="details">
+                            <p>In our first step, we’ll be helping conscious entrepreneurs improve
+                                wellness in
+                                the world, because we believe that any big change comes from self-change, and wellness
+                                is
+                                the
+                                foundation for a positive, personal transformation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- nav -->
-        <div class="navs_wrapper">
-            <!-- <button class="nav-button"></button> -->
-            <nav class="nav home_navs" role="navigation">
-                <?php html5blank_nav_extra(); ?>
-                <!-- /* ADD WHEN ADDING LANGS (DONT FORGER JS) */ -->
-                <?php //echo do_shortcode('[wpml_language_switcher type="custom" flags=0 native=1 translated=0]'); ?>
-            </nav>
-
-        </div>
-
-        <!-- /nav -->
     </section>
-    <div class="back reveal">
+    <div class="back">
         <div class="back-wrapper">
             <div class="back-group reveal-min-divi link">
-                <a href="#"></a>
+                <a href="/"></a>
                 <svg xmlns="http://www.w3.org/2000/svg" width="33.331" height="21.125" viewBox="0 0 33.331 21.125">
                     <g id="Arrows_Events" data-name="Arrows Events" transform="translate(1755.873 990.563) rotate(180)">
                         <line id="Line_77" data-name="Line 77" x2="30.917" transform="translate(1723.542 979.685)"
